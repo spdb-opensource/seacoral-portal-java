@@ -1,0 +1,52 @@
+[
+  {
+    "name": "mysql service",
+    "id": "111",
+    "owner": "tenant",
+    "capacity": "10G",
+    "software": "mysql_5.1.1",
+ "architecture": "1主1备",
+ "scale": "S型(1核2G)",
+    "state": "false"
+  },
+  {
+    "name": "mysql2 service",
+    "id": "112",
+    "owner": "tenant",
+    "capacity": "10G",
+    "software": "mysql_5.1.2",
+ "architecture": "1主1备",
+ "scale": "S型(1核2G)",
+    "state": "false"
+  },
+  {
+    "name": "redis service",
+    "id": "113",
+    "owner": "tenant",
+    "capacity": "10G",
+    "software": "redis_5.1.1",
+ "architecture": "集群分片3节点0副本",
+ "scale": "S型(1核2G)",
+    "state": "false"
+  },
+  {
+    "name": "redis service",
+    "id": "114",
+    "owner": "tenant",
+    "capacity": "10G",
+    "software": "redis_5.1.1",
+ "architecture": "集群分片3节点0副本",
+ "scale": "S型(1核2G)",
+    "state": "false"
+  },
+  {
+    "name": "redis service",
+    "id": "115",
+    "owner": "tenant",
+    "capacity": "10G",
+    "software": "redis_5.1.1",
+ "architecture": "集群分片3节点0副本",
+ "scale": "S型(1核2G)",
+    "state": "false"
+  }
+]

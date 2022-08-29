@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.GroupDAO">
+	<resultMap id="groupRM" type="com.bsg.upm.domain.GroupDO">
+		<id property="id" column="group_id" />
+		<result property="name" column="group_name" />
+		<result property="description" column="group_description" />
+		<result property="gmtCreate" column="group_gmt_create" />
+		<result property="creator" column="group_creator" />
+		<result property="gmtModified" column="group_gmt_modified" />
+		<result property="editor" column="group_editor" />
+	</resultMap>
+
+	<sql id="group_p1">
+		g.id AS group_id,
+		g.name AS group_name
+	</sql>
+
+	<sql id="group">
+		<include refid="group_p1" />
+		,
+		g.description AS group_description,
+		g.gmt_create AS group_gmt_create,
+		g.creator AS group_creator,
+		g.gmt_modified AS group_gmt_modified,
+		g.editor AS group_editor
+	</sql>
+
+	<select id="list" resultMap="groupRM">
+		SELECT
+		<include refid="group" />
+		FROM tbl_group g
+		ORDER BY g.id DESC
+	</select>
+
+	<select id="get" resultMap="groupRM">
+		SELECT
+		<include refid="group" />
+		FROM tbl_group g
+		WHERE g.id = #{id}
+	</select>
+
+	<select id="getByNameAndCreator" resultMap="groupRM">
+		SELECT
+		<include refid="group" />
+		FROM tbl_group g
+		WHERE g.name = #{name}
+		AND g.creator = #{creator}
+	</select>
+
+	<insert id="save" parameterType="com.bsg.upm.domain.GroupDO"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tbl_group
+		(
+		id,
+		name,
+		description,
+		gmt_create,
+		creator
+		)
+		VALUES
+		(
+		#{id},
+		#{name},
+		#{description},
+		#{gmtCreate},
+		#{creator}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE tbl_group
+		<set>
+			name = #{name},
+			description = #{description},
+			gmt_modified = #{gmtModified},
+			editor = #{editor}
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="remove">
+		DELETE FROM tbl_group
+		WHERE id = #{id}
+	</delete>
+</mapper>

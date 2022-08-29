@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.OrderGroupDAO">
+    <resultMap id="orderGroupRM" type="com.bsg.upm.domain.OrderGroupDO">
+        <id property="id" column="og_id" />
+        <result property="type" column="og_type" />
+        <result property="siteId" column="og_site_id" />
+        <result property="areaCode" column="og_area_code" />
+        <result property="name" column="og_name" />
+        <result property="actionType" column="og_action_type" />
+        <result property="status" column="og_status" />
+        <result property="msg" column="og_msg" />
+        <result property="owner" column="og_owner" />
+        <result property="relateAppId" column="og_relate_app_id" />
+        <result property="relateTaskId" column="og_relate_task_id" />
+        <result property="extendJsonStr" column="og_extend_json_str" />
+        <result property="gmtCreate" column="og_gmt_create" />
+        <result property="creator" column="og_creator" />
+        <result property="gmtModified" column="og_gmt_modified" />
+        <result property="editor" column="og_editor" />
+        <result property="isDeleted" column="og_isDeleted" />
+        <result property="businessSubsystemId" column="og_business_subsystem_id" />
+        <association property="businessSubsystem" 
+            resultMap="com.bsg.upm.dao.BusinessSubsystemDAO.businessSubsysDetailRM">
+        </association>
+        <collection property="orders" resultMap="com.bsg.upm.dao.OrderDAO.orderRM">    
+        </collection>
+    </resultMap>
+    
+    
+    <sql id="order_group">
+        og.id AS og_id,
+        og.type AS og_type,
+        og.site_id AS og_site_id,
+        og.area_code AS og_area_code,
+        og.name AS og_name,
+        og.action_type AS og_action_type,
+        og.status AS og_status,
+        og.msg AS og_msg,
+        og.owner AS og_owner,
+        og.relate_app_id AS og_relate_app_id,
+        og.relate_task_id AS og_relate_task_id,
+        og.extend_json_str AS og_extend_json_str,
+        og.gmt_create AS og_gmt_create,
+        og.creator AS og_creator,
+        og.gmt_modified AS og_gmt_modified,
+        og.editor AS og_editor,
+        og.isDeleted AS og_isDeleted,
+        og.business_subsystem_id AS og_business_subsystem_id
+    </sql>
+    
+    <select id="list" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />,
+            <include refid="com.bsg.upm.dao.BusinessSubsystemDAO.subsys_p1" />,
+            <include refid="com.bsg.upm.dao.BusinessSystemDAO.sys_p1" />,
+            
+            <include refid="com.bsg.upm.dao.OrderDAO.order" />
+        FROM tbl_order_group og,
+        	tbl_business_subsystem subsys, 
+            tbl_business_system sys,
+            tbl_order o
+        WHERE og.business_subsystem_id = subsys.id
+            AND subsys.business_system_id = sys.id 
+         	AND o.order_group_id = og.id and og.isDeleted=0
+        <if test="siteId != null">
+            AND og.site_id = #{siteId}
+        </if>
+        <if test="type != null">
+            AND og.type = #{type}
+        </if>
+        <if test="actionType != null">
+            AND og.action_type = #{actionType}
+        </if>
+        <if test="status != null">
+            AND og.status = #{status}
+        </if>
+        ORDER BY og.id DESC
+    </select>
+    
+    <select id="get" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />,
+            <include refid="com.bsg.upm.dao.BusinessSubsystemDAO.subsys_p1" />,
+            <include refid="com.bsg.upm.dao.BusinessSystemDAO.sys_p1" />,
+            <include refid="com.bsg.upm.dao.OrderDAO.order" />
+        FROM tbl_order_group og,
+        
+        	tbl_business_subsystem subsys, 
+            tbl_business_system sys,
+            tbl_order o 
+        WHERE  og.business_subsystem_id = subsys.id
+            AND subsys.business_system_id = sys.id
+       		AND o.order_group_id = og.id and og.isDeleted=0
+            AND og.id = #{id}
+        ORDER BY o.type DESC
+    </select>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.OrderGroupDO"
+        >
+<!--         <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE"> -->
+<!--             select replace(uuid(),'-','') -->
+<!--             </selectKey> -->
+        INSERT INTO tbl_order_group
+        (
+        	id,
+        	business_subsystem_id,
+            type,
+            site_id,
+            area_code,       
+            name,
+            action_type,
+            status,
+            msg,
+            owner,
+            relate_app_id,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+        	#{id},
+        	#{businessSubsystemId},
+            #{type},
+            #{siteId},
+            #{areaCode},        
+            #{name},
+            #{actionType},
+            #{status},
+            #{msg},
+            #{owner},
+            #{relateAppId},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <select id="getBase" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />
+        FROM tbl_order_group og
+        WHERE og.id = #{id} and og.isDeleted=0
+    </select>
+    
+    <update id="updateStatusAndMsg">
+        UPDATE tbl_order_group
+        <set>
+            status = #{status},
+            msg = #{msg}
+        </set>
+        WHERE id = #{id} and isDeleted=0
+    </update>
+    
+    <update id="updateStatus">
+        UPDATE tbl_order_group
+        <set>
+            status = #{status}
+        </set>
+        WHERE id = #{id} and isDeleted=0
+    </update>
+    
+    <update id="update">
+        UPDATE tbl_order_group
+        <set>
+        	business_subsystem_id = #{businessSubsystemId},
+            site_id = #{siteId},         
+            area_code = #{areaCode},
+            name = #{name},
+            status = #{status},
+            msg = #{msg},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id} and isDeleted=0
+    </update>
+    
+    <delete id="remove">
+        DELETE FROM tbl_order_group
+        WHERE name = #{name} 
+    </delete>
+    
+    <update id="removeDeleted">
+    	UPDATE tbl_order_group
+        <set>
+            isDeleted = 1
+        </set>
+        WHERE name = #{name} 
+    </update>
+    
+    <select id="countByBusinessSubsystemId" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_order_group
+        WHERE business_subsystem_id = #{businessSubsystemId}
+    </select>
+    
+    <update id="updateBusinessSubstemIdAndOwner">
+        UPDATE tbl_order_group
+        <set>
+            business_subsystem_id = #{businessSubsystemId},         
+            owner = #{owner}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    
+    
+    <update id="updateServGroupId">
+        UPDATE tbl_order_group
+        <set>
+            relate_app_id = #{relateAppId},
+            relate_task_id = #{relateTaskId}           
+        </set>
+        WHERE id = #{id} and isDeleted=0
+    </update>
+    
+    <select id="getLastOneByServerGroupId" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />
+        FROM tbl_order_group og 
+        WHERE 
+            og.relate_app_id=#{serverGroupId} and og.isDeleted=0
+        order by id desc 
+        limit 1
+    </select>
+    
+    <select id="checkName" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />
+        FROM tbl_order_group og 
+        WHERE 
+            og.name=#{name} and og.isDeleted=0
+    </select>
+    
+    <select id="checkNameAndActionType" resultMap="orderGroupRM">
+        SELECT 
+            <include refid="order_group" />
+        FROM tbl_order_group og 
+        WHERE 
+            og.name=#{name} and og.action_type=#{actionType} and og.isDeleted=0 order by og.gmt_create desc limit 1
+    </select>
+    
+</mapper>

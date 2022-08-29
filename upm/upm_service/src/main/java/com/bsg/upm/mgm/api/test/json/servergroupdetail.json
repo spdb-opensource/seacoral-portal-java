@@ -1,0 +1,199 @@
+[{
+	"id": "xxxx",
+	"name": "app001",
+	"desc": "xxxxxxxx",
+	"task": {
+		"id": "xxxxxx",
+		"action": "xxxxx",
+		"status": "xxxxx"
+	},
+	"created": {
+		"user": "xxx",
+		"timestamp": "yyyy-mm-dd hh:mm:ss"
+	},
+	"modified": {
+		"user": "xxx",
+		"timestamp": "yyyy-mm-dd hh:mm:ss"
+	},
+	"state": "passing",
+	"status": {
+		"database": {
+			"services": [{
+				"name": "part1",
+				"arch": {
+					"mode": "replication_semi_sync",
+					"replicas": 2
+				},
+				"ports": [{
+					"name": "server",
+					"port": 3306
+				}],
+				"units": [{
+					"id": "app001-database000-unit001",
+					"image": {
+						"id": "xxxxx",
+						"type": "mysql",
+						"major": 5,
+						"minor": 7,
+						"patch": 24,
+						"build": 1
+					},
+					"resources": {
+						"cpu": 0.5,
+						"memory": 1000,
+						"net_bandwidth": 100,
+						"storage": {
+							"type": "remote",
+							"performance": "high",
+							"volumes": [{
+								"type": "data",
+								"capacity": 2000
+							},
+							{
+								"type": "log",
+								"capacity": 1000
+							}]
+						}
+					},
+					"ip": "192.168.100.1",
+					"node": {
+						"cluster": {
+							"id": "xxxx",
+							"name": "cluster001"
+						},
+						"id": "node-xxx",
+						"name": "xxxxx",
+						"host_ip": "192.168.2.44"
+					},
+					"replication": {
+						"self_ip": "192.168.100.1",
+						"self_port": 3306,
+						"role": "master",
+						"master_ip": "192.168.100.1",
+						"master_port": 3306
+					},
+					"state": "passing",
+					"pod_state": "running",
+					"start_at": "yyyy-mm-dd hh:mm:ss"
+				},
+				{
+					"id": "app001-database-XXXXXXXX",
+					"image": {
+						"id": "xxxxx",
+						"type": "mysql",
+						"major": 5,
+						"minor": 7,
+						"patch": 24,
+						"build": 1
+					},
+					"resources": {
+						"cpu": 0.5,
+						"memory": 1000,
+						"net_bandwidth": 100,
+						"storage": {
+							"type": "remote",
+							"performance": "high",
+							"volumes": [{
+								"type": "data",
+								"capacity": 2000
+							},
+							{
+								"type": "log",
+								"capacity": 1000
+							}]
+						}
+					},
+					"ip": "192.168.100.2",
+					"node": {
+						"cluster": {
+							"id": "xxxx",
+							"name": "cluster001"
+						},
+						"id": "node-xxx",
+						"name": "xxxxx",
+						"host_ip": "192.168.2.43"
+					},
+					"replication": {
+						"self_ip": "192.168.100.2",
+						"self_port": 3306,
+						"role": "slave",
+						"master_ip": "192.168.100.1",
+						"master_port": 3306,
+						"slave_io_running": "Yes",
+						"slave_sql_running": "Yes",
+						"slave_io_state": "Waiting for master to send event",
+						"slave_sql_running_state": "Slave has read all relay log; waiting for more updates",
+						"seconds_behind_master": 0,
+						"master_log_file": "mysql-bin.000001",
+						"relay_master_log_file": "mysql-bin.000001",
+						"read_master_log_pos": 154,
+						"exec_master_log_pos": 154,
+						"relay_log_file": "relay-bin.000002",
+						"relay_log_pos": 367,
+						"last_io_error": "",
+						"last_sql_error": ""
+					},
+					"state": "passing",
+					"pod_state": "running/pending",
+					"start_at": "yyyy-mm-dd hh:mm:ss"
+				}]
+			}]
+		}
+	},
+	"spec": {
+		"database": {
+			"image": {
+				"id": "xxxxx"
+			},
+			"services": {
+				"num": 1,
+				"arch": {
+					"mode": "single",
+					"replicas": 1
+				},
+				"ports": [{
+					"name": "server",
+					"port": 3306
+				}],
+				"options": {
+					"character_set_server": "utf8mb4"
+				},
+				"conditions": {
+					"cluster": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"host": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"storage_remote": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"network": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					}
+				},
+				"units": {
+					"resources": {
+						"requests": {
+							"cpu": 0.5,
+							"memory": 1000,
+							"net_bandwidth": 100,
+							"storage": {
+								"type": "remote",
+								"performance": "high",
+								"volumes": [{
+									"type": "data",
+									"capacity": 100
+								}]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}]

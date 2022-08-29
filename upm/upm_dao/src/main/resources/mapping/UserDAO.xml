@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.UserDAO">
+    <resultMap id="userRM" type="com.bsg.upm.domain.UserDO">
+        <id property="id" column="user_id" />
+        <result property="username" column="username" />
+        <result property="authType" column="user_auth_type" />
+        <result property="password" column="password" />
+        <result property="name" column="user_name" />
+        <result property="telephone" column="user_telephone" />
+        <result property="email" column="user_email" />
+        <result property="company" column="user_company" />
+        <result property="emerContact" column="user_emer_contact" />
+        <result property="emerTel" column="user_emer_tel" />
+        <result property="enabled" column="user_is_enabled" />
+        <result property="roleId" column="role_id" />
+        <result property="gmtCreate" column="user_gmt_create" />
+        <result property="creator" column="user_creator" />
+        <result property="gmtModified" column="user_gmt_modified" />
+        <result property="editor" column="user_editor" />
+    </resultMap>
+
+    <resultMap id="userDetailRM" extends="userRM"
+        type="com.bsg.upm.domain.UserDO">
+        <association property="role"
+            resultMap="com.bsg.upm.dao.RoleDAO.roleRM" />
+        <collection property="groups" resultMap="com.bsg.upm.dao.GroupDAO.groupRM"></collection>    
+    </resultMap>
+    
+    <sql id="user">
+        u.id AS user_id,
+        u.auth_type AS user_auth_type,
+        u.username,
+        u.password,
+        u.name AS user_name,
+        u.telephone AS user_telephone,
+        u.email AS user_email,
+        u.company AS user_company,
+        u.emer_contact AS user_emer_contact,
+        u.emer_tel AS user_emer_tel,
+        u.is_enabled AS user_is_enabled,
+        u.gmt_create AS user_gmt_create,
+        u.creator AS user_creator,
+        u.gmt_modified AS user_gmt_modified,
+        u.editor AS user_editor
+    </sql>
+
+    <select id="list" resultMap="userDetailRM">
+        SELECT 
+            <include refid="user" />,
+            <include refid="com.bsg.upm.dao.RoleDAO.role_p1" />,
+            <include refid="com.bsg.upm.dao.GroupDAO.group_p1" />
+        FROM tbl_user u 
+                LEFT JOIN tbl_group_user gu ON u.username = gu.username 
+                LEFT JOIN tbl_group g ON gu.group_id = g.id, 
+            tbl_role r
+        WHERE r.id = u.role_id
+        <if test="roleId != null">
+            AND r.id = #{roleId}
+        </if>
+        <if test="groupId != null">
+            AND g.id = #{groupId}
+        </if>
+        <if test="enabled != null">
+            AND u.enabled = #{enabled}
+        </if>
+        ORDER BY u.id DESC
+    </select>
+    
+    <select id="listBase" resultMap="userRM">
+        SELECT 
+            <include refid="user" />
+        FROM tbl_user u 
+        ORDER BY u.id DESC
+    </select>
+    
+    <select id="getByUsername" resultMap="userDetailRM">
+       SELECT 
+            <include refid="user" />,
+            <include refid="com.bsg.upm.dao.RoleDAO.role_p1" />,
+            <include refid="com.bsg.upm.dao.GroupDAO.group_p1" />
+        FROM tbl_user u 
+                LEFT JOIN tbl_group_user gu ON u.username = gu.username 
+                LEFT JOIN tbl_group g ON gu.group_id = g.id, 
+            tbl_role r
+        WHERE r.id = u.role_id
+            AND u.username = #{username}
+    </select>
+    
+    <select id="get" resultMap="userDetailRM">
+       SELECT 
+            <include refid="user" />,
+            <include refid="com.bsg.upm.dao.RoleDAO.role_p1" />,
+            <include refid="com.bsg.upm.dao.GroupDAO.group_p1" />
+        FROM tbl_user u 
+                LEFT JOIN tbl_group_user gu ON u.username = gu.username 
+                LEFT JOIN tbl_group g ON gu.group_id = g.id, 
+            tbl_role r
+        WHERE r.id = u.role_id
+            AND u.username = #{username}
+            AND u.password = #{password}
+    </select>
+    
+    <select id="countByTelephone" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_user
+        WHERE telephone = #{telephone}
+    </select>
+    
+    <select id="countByEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_user
+        WHERE email = #{email}
+    </select>
+    
+    <select id="countByRoleId" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_user
+        WHERE role_id = #{roleId}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.UserDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_user
+        (
+        	id,
+            username,
+            auth_type,
+            password,
+            name,
+            telephone,
+            email,
+            company,
+            emer_contact,
+            emer_tel,
+            is_enabled,
+            role_id,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+        	#{id},
+            #{username},
+            #{authType},
+            #{password},
+            #{name},
+            #{telephone},
+            #{email},
+            #{company},
+            #{emerContact},
+            #{emerTel},
+            #{enabled},
+            #{roleId},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.bsg.upm.domain.UserDO">
+        UPDATE tbl_user
+        <set>
+            name = #{name},
+            telephone = #{telephone},
+            email = #{email},
+            company = #{company},
+            emer_contact = #{emerContact},
+            emer_tel = #{emerTel},
+            role_id = #{roleId},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateEnabled" parameterType="com.bsg.upm.domain.UserDO">
+        UPDATE tbl_user
+        <set>
+            is_enabled = #{enabled},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="updatePwd" parameterType="com.bsg.upm.domain.UserDO">
+        UPDATE tbl_user
+        <set>
+            password = #{password},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="removeCascadeByUsername">
+        DELETE u, gu FROM tbl_user u, 
+            tbl_group_user gu
+        WHERE u.username = gu.username
+            AND u.username = {username}
+    </delete>
+
+</mapper>

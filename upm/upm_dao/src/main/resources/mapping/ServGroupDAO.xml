@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.ServGroupDAO">
+    <resultMap id="servGroupRM" type="com.bsg.upm.domain.ServGroupDO">
+        <id property="id" column="id" />
+        <result property="businessSubsystemId" column="business_subsystem_id" />
+        <result property="relateId" column="relate_id" />
+    </resultMap>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.ServGroupDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_serv_group
+        (
+        	id,
+            business_subsystem_id,
+            relate_id
+        )
+        VALUES
+        (
+            #{id},
+            #{businessSubsystemId},
+            #{relateId}
+        )
+    </insert>
+    
+    <update id="updateSharding">
+        UPDATE tbl_serv_group
+        <set>
+            sharding = #{sharding}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="updateFlag">
+        UPDATE tbl_serv_group
+        <set>
+            flag = #{flag}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="updateBusinessSubstemIdAndOwner">
+        UPDATE tbl_serv_group
+        <set>
+            business_subsystem_id = #{businessSubsystemId},         
+            owner = #{owner}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="remove">
+        DELETE FROM tbl_serv_group
+        WHERE relate_id = #{relateId}
+    </delete>
+    
+    <update id="updateRemark">
+        UPDATE tbl_serv_group
+        <set>
+            remark = #{remark}
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>

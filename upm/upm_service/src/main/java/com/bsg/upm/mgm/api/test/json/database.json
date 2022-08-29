@@ -1,0 +1,16 @@
+[{
+	"name": "spdb",
+	"character_set": "utf8mb4",
+	"tables": [{
+		"name": "tab1",
+		"size": 1024
+	}]
+},
+{
+	"name": "db1",
+	"character_set": "utf8mb4",
+	"tables": [{
+		"name": "tab1",
+		"size": 1024
+	}]
+}]

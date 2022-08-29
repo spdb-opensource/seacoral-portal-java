@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.ScaleDAO">
+    <resultMap id="scaleRM" type="com.bsg.upm.domain.ScaleDO">
+        <id property="id" column="scale_id" />
+        <result property="type" column="scale_type" />
+        <result property="name" column="scale_name" />
+        <result property="cpuCnt" column="scale_cpu_cnt" />
+        <result property="memSize" column="scale_mem_size" />
+        <result property="enabled" column="scale_is_enabled" />
+        <result property="sequence" column="scale_sequence" />
+        <result property="description" column="scale_description" />
+        <result property="gmtCreate" column="scale_gmt_create" />
+        <result property="creator" column="scale_creator" />
+        <result property="gmtModified" column="scale_gmt_modified" />
+        <result property="editor" column="scale_editor" />
+    </resultMap>
+    
+    <sql id="scale_p1">
+        scale.id AS scale_id,
+        scale.type AS scale_type,
+        scale.name AS scale_name,
+        scale.cpu_cnt AS scale_cpu_cnt,
+        scale.mem_size AS scale_mem_size,
+        scale.is_enabled AS scale_is_enabled,
+        scale.gmt_create AS scale_gmt_create,
+        scale.creator AS scale_creator,
+        scale.gmt_modified AS scale_gmt_modified,
+        scale.editor AS scale_editor
+    </sql>
+    
+    <sql id="scale">
+        <include refid="scale_p1" />,
+        scale.sequence AS scale_sequence,
+        scale.description AS scale_description
+    </sql>
+    
+    <select id="list" resultMap="scaleRM">
+        SELECT 
+            <include refid="scale" />
+        FROM tbl_scale scale
+        <where>
+            <if test="type != null">
+                scale.type = #{type}
+            </if>
+            <if test="enabled != null">
+                AND scale.is_enabled = #{enabled}
+            </if>
+        </where> 
+        ORDER BY scale.type ASC, scale.sequence ASC
+    </select>
+
+    <select id="get" resultMap="scaleRM">
+        SELECT 
+            <include refid="scale" />
+        FROM tbl_scale scale 
+        WHERE scale.id = #{id}
+    </select>
+    
+    <select id="getByTypeAndCpuAndMem" resultMap="scaleRM">
+        SELECT 
+            <include refid="scale" />
+        FROM tbl_scale scale 
+        WHERE scale.type = #{type}
+            AND scale.cpu_cnt = #{cpuCnt} 
+            AND scale.mem_size = #{memSize} 
+    </select>
+    
+    <select id="countByTypeAndName" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_scale
+        WHERE type = #{type}
+            AND name = #{name} 
+    </select>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.ScaleDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_scale
+        (
+        	id,
+            type,
+            name,         
+            cpu_cnt,
+            mem_size,
+            is_enabled,
+            sequence,
+            description,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+        	#{id},
+            #{type},
+            #{name},        
+            #{cpuCnt},
+            #{memSize},
+            #{enabled},
+            #{sequence},
+            #{description},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE tbl_scale
+        <set>
+            name = #{name},
+            sequence = #{sequence},
+            description = #{description},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <update id="updateEnabled">
+        UPDATE tbl_scale
+        <set>
+            is_enabled = #{enabled},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="remove">
+        DELETE FROM tbl_scale
+        WHERE id = #{id}
+    </delete>
+</mapper>

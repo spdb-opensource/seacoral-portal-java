@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.AppDAO">
+	<resultMap id="appRM" type="com.bsg.upm.domain.AppDO">
+		<id property="id" column="app_id" />
+		<result property="name" column="app_name" />
+		<result property="type" column="app_type" />
+		<result property="code" column="app_code" />
+		<result property="icon" column="app_icon" />
+		<result property="sequence" column="app_sequence" />
+		<result property="pid" column="app_pid" />
+	</resultMap>
+
+	<sql id="app">
+		app.id AS app_id,
+		app.name AS app_name,
+		app.type AS app_type,
+		app.code AS app_code,
+		app.icon AS app_icon,
+		app.sequence AS app_sequence,
+		app.pid AS
+		app_pid
+	</sql>
+
+	<sql id="app_p1">
+		app2.id AS app_id,
+		app2.name AS app_name,
+		app2.type AS app_type,
+		app2.code AS app_code,
+		app2.sequence AS app_sequence,
+		app2.pid
+		AS app_pid
+	</sql>
+
+	<select id="list" resultMap="appRM">
+		SELECT
+		<include refid="app" />
+		FROM tbl_app app
+		ORDER BY app.pid,app.sequence ASC
+	</select>
+
+	<select id="listBtnApp" resultMap="appRM">
+		SELECT
+		<include refid="app_p1" />
+		FROM tbl_app app1,tbl_app app2,tbl_role_cfg_app roleCfgApp
+		WHERE
+		app1.code=#{path}
+		AND roleCfgApp.role_id=#{roleId}
+		AND
+		roleCfgApp.app_id=app2.id
+		AND app2.pid=app1.id
+		AND app2.type='button'
+		ORDER BY app2.sequence ASC;
+	</select>
+
+	<select id="listSubBtnApp" resultMap="appRM">
+		SELECT
+		<include refid="app_p1" />
+		FROM tbl_app app1,tbl_app app2,tbl_role_cfg_app roleCfgApp
+		WHERE
+		app1.code=#{path}
+		AND roleCfgApp.role_id=#{roleId}
+		AND roleCfgApp.app_id=app2.id
+		AND app2.pid=app1.id
+		AND app2.type='subButton'
+		ORDER BY app2.sequence ASC;
+	</select>
+	<select id="listsSubBtnApp" resultMap="appRM">
+		SELECT
+		<include refid="app_p1" />
+		FROM tbl_app app1,tbl_app app2,tbl_role_cfg_app roleCfgApp
+		WHERE
+		app1.code=#{path}
+		AND roleCfgApp.role_id=#{roleId}
+		AND roleCfgApp.app_id=app2.id
+		AND app2.pid=app1.id
+		AND app2.type='sSubButton'
+		ORDER BY app2.sequence ASC;
+	</select>
+	<select id="listMenu" resultMap="appRM">
+		SELECT
+		<include refid="app" />
+		FROM tbl_role_cfg_app trca,tbl_app app
+		WHERE trca.role_id=#{roleId}
+		AND
+		trca.app_id=app.id
+		AND app.type='menu'
+		ORDER BY app.sequence ASC;
+	</select>
+	<select id="listPage" resultMap="appRM">
+		SELECT
+		<include refid="app" />
+		FROM tbl_role_cfg_app trca,tbl_app app
+		WHERE trca.role_id=#{roleId}
+		AND trca.app_id=app.id
+		AND app.type='page'
+		ORDER BY app.sequence ASC;
+	</select>
+</mapper>

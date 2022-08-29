@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.RoleCfgDataScopeDAO">
+    <resultMap id="dataScopeRM" type="com.bsg.upm.domain.RoleCfgDataScopeDO">
+        <id property="id" column="data_scope_id" />
+        <result property="roleId" column="data_scope_role_id" />
+        <result property="orderGroup" column="data_scope_order_group" />
+        <result property="servGroup" column="data_scope_serv_group" />
+        <result property="operateLog" column="data_scope_operate_log" />
+    </resultMap>
+    
+    <sql id="data_scope">
+        cds.id AS data_scope_id,
+        cds.role_id AS data_scope_role_id,
+        cds.order_group AS data_scope_order_group,
+        cds.serv_group AS data_scope_serv_group,
+        cds.operate_log AS data_scope_operate_log
+    </sql>
+
+    <select id="list" resultMap="dataScopeRM">
+        SELECT 
+            <include refid="data_scope" />
+        FROM tbl_role_cfg_data_scope cds
+    </select>
+
+    <select id="getByRoleId" resultMap="dataScopeRM">
+        SELECT 
+            <include refid="data_scope" />
+        FROM tbl_role_cfg_data_scope cds
+        WHERE cds.role_id = #{roleId}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.RoleCfgDataScopeDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_role_cfg_data_scope
+        (
+        id,
+            role_id,
+            order_group,
+            serv_group,
+            operate_log
+        )
+        VALUES
+        (
+        #{id},
+            #{roleId},
+            #{orderGroup},
+            #{servGroup},
+            #{operateLog}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.bsg.upm.domain.RoleCfgDataScopeDO">
+        UPDATE tbl_role_cfg_data_scope
+        <set>
+            order_group = #{orderGroup},
+            serv_group = #{servGroup},
+            operate_log = #{operateLog}
+        </set>
+        WHERE role_id = #{roleId}
+    </update>
+
+    <delete id="removeByRoleId">
+        DELETE FROM tbl_role_cfg_data_scope
+        WHERE role_id = #{roleId}
+    </delete>
+
+</mapper>

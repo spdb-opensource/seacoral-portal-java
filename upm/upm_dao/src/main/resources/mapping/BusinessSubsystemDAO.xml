@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.BusinessSubsystemDAO">
+    <resultMap id="businessSubsysRM" type="com.bsg.upm.domain.BusinessSubsystemDO">
+        <id property="id" column="subsys_id" />
+        <result property="name" column="subsys_name" />
+        <result property="description" column="subsys_description" />
+        <result property="businessSystemId" column="subsys_sys_id" />
+        <result property="gmtCreate" column="subsys_gmt_create" />
+        <result property="creator" column="subsys_creator" />
+        <result property="gmtModified" column="subsys_gmt_modified" />
+        <result property="editor" column="subsys_editor" />
+    </resultMap>
+
+    <resultMap id="businessSubsysDetailRM" type="com.bsg.upm.domain.BusinessSubsystemDO"
+        extends="businessSubsysRM">
+        <association property="businessSystem"
+            resultMap="com.bsg.upm.dao.BusinessSystemDAO.businessSysRM" />    
+    </resultMap>
+    
+    <sql id="subsys_p1">
+        subsys.id AS subsys_id,
+        subsys.name AS subsys_name
+    </sql>
+    
+    <sql id="subsys">
+        <include refid="subsys_p1" />,
+        subsys.description AS subsys_description,
+        subsys.business_system_id AS subsys_sys_id,
+        subsys.gmt_create AS subsys_gmt_create,
+        subsys.creator AS subsys_creator,
+        subsys.gmt_modified AS subsys_gmt_modified,
+        subsys.editor AS subsys_editor
+    </sql>
+    
+    <select id="list" resultMap="businessSubsysDetailRM">
+        SELECT 
+            <include refid="subsys" />,
+            <include refid="com.bsg.upm.dao.BusinessSystemDAO.sys_p1" />
+        FROM tbl_business_subsystem subsys, 
+            tbl_business_system sys
+        WHERE subsys.business_system_id = sys.id 
+        <if test="businessSystemId != null">
+            AND sys.id = #{businessSystemId}
+        </if>
+        <if test="owner != null">
+            AND sys.owner = #{owner}
+        </if>    
+        ORDER BY subsys.id DESC
+    </select>
+    
+    <select id="get" resultMap="businessSubsysDetailRM">
+        SELECT 
+            <include refid="subsys" />,
+            <include refid="com.bsg.upm.dao.BusinessSystemDAO.sys_p1" />
+        FROM tbl_business_subsystem subsys, 
+            tbl_business_system sys
+        WHERE subsys.business_system_id = sys.id 
+            AND subsys.id = #{id}
+    </select>
+    
+    <select id="getByNameAndBusinessSystemId" resultMap="businessSubsysRM">
+        SELECT 
+            <include refid="subsys" />
+        FROM tbl_business_subsystem subsys
+        WHERE subsys.name = #{name} 
+            AND subsys.business_system_id = #{businessSystemId}
+    </select>
+    
+    <select id="countByBusinessSystemId" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_business_subsystem
+        WHERE business_system_id = #{businessSystemId}
+    </select>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.BusinessSubsystemDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_business_subsystem
+        (
+        	id,
+            name,         
+            description,
+            business_system_id,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+            #{id},
+            #{name},
+            #{description},
+            #{businessSystemId},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE tbl_business_subsystem
+        <set>
+            name = #{name},
+            description = #{description},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="remove">
+        DELETE FROM tbl_business_subsystem
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

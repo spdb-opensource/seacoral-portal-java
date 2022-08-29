@@ -1,0 +1,64 @@
+[
+	{
+		"id": "1",
+		"name": "test-site001",
+		"type": "kubernetes",
+		"domain": "project.dbscale.com",
+		"port": 6443,
+		"version": "1.15.0",
+		"state": "passing",
+		"desc": "xxxxx001",
+		"region": "SH",
+		"created": {
+			"user": "xx001",
+			"timestamp": "2019-07-08 13:15:23"
+		},
+		"modified": {
+			"user": "xxx001",
+			"timestamp": "2019-07-08 13:16:23"
+		}
+	},
+	{
+		"id": "2",
+		"name": "test-site002",
+		"type": "kubernetes",
+		"domain": "project.dbscale2.com",
+		"port": 6442,
+		"version": "1.15.0",
+		"state": "warning",
+		"desc": "xxxxx002",
+		"region": "SH",
+		"created": {
+			"user": "xx002",
+			"timestamp": "2019-07-08 13:15:23"
+		},
+		"modified": {
+			"user": "xxx003",
+			"timestamp": "2019-07-08 13:16:23"
+		}
+	},
+	{
+		"id": "3",
+		"name": "test-site003",
+		"type": "kubernetes",
+		"domain": "project.dbscale3.com",
+		"port": 6441,
+		"version": "1.15.0",
+		"state": "critical",
+		"desc": "xxxxx003",
+		"region": "SH",
+		"created": {
+			"user": "xx003",
+			"timestamp": "2019-07-08 13:15:23"
+		},
+		"modified": {
+			"user": "xxx004",
+			"timestamp": "2019-07-08 13:16:23"
+		}
+	},
+	{
+		"id": "4"
+	}
+]
+
+

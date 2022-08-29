@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.BusinessSystemDAO">
+    <resultMap id="businessSysRM" type="com.bsg.upm.domain.BusinessSystemDO">
+        <id property="id" column="sys_id" />
+        <result property="name" column="sys_name" />
+        <result property="description" column="sys_description" />
+        <result property="owner" column="sys_owner" />
+        <result property="gmtCreate" column="sys_gmt_create" />
+        <result property="creator" column="sys_creator" />
+        <result property="gmtModified" column="sys_gmt_modified" />
+        <result property="editor" column="sys_editor" />
+        <result property="businessSubSystemName" column="businessSubSystemName" />
+    </resultMap>
+    
+    <sql id="sys_p1">
+        sys.id AS sys_id,
+        sys.name AS sys_name,
+        sys.owner AS sys_owner
+    </sql>
+    
+    <sql id="sys">
+        <include refid="sys_p1" />,
+        sys.description AS sys_description,
+        sys.gmt_create AS sys_gmt_create,
+        sys.creator AS sys_creator,
+        sys.gmt_modified AS sys_gmt_modified,
+        sys.editor AS sys_editor
+    </sql>
+
+    <select id="list" resultMap="businessSysRM">
+        SELECT 
+            <include refid="sys" />
+        FROM tbl_business_system sys
+        WHERE sys.owner = #{owner} 
+        ORDER BY sys.id DESC
+    </select>
+    
+    <select id="get" resultMap="businessSysRM">
+       SELECT 
+            <include refid="sys" />         
+        FROM tbl_business_system sys
+        WHERE sys.id = #{id}
+    </select>
+    
+    <select id="getByNameAndOwner" resultMap="businessSysRM">
+        SELECT 
+            <include refid="sys" />          
+        FROM tbl_business_system sys
+        WHERE sys.name = #{name} 
+            AND sys.owner = #{owner}
+    </select>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.BusinessSystemDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_business_system
+        (
+            id,
+            name,         
+            description,
+            owner,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+            #{id}, 
+            #{name},        
+            #{description},
+            #{owner},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE tbl_business_system
+        <set>
+            name = #{name},
+            description = #{description},
+            owner = #{owner},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="remove">
+        DELETE FROM tbl_business_system
+        WHERE id = #{id}
+    </delete>
+    
+    <select id="getBusinessName" resultMap="businessSysRM">
+	    select s.name as businessSubSystemName ,b.name as name  
+	    from   tbl_business_system  b  ,tbl_business_subsystem s 
+		where  s.id= #{businessSubsystemId}  and s.business_system_id = b.id
+    </select>
+
+</mapper>

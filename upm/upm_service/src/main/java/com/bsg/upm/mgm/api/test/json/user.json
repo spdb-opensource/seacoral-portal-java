@@ -1,0 +1,23 @@
+[
+  {
+    "name": "zhang",
+    "ip": "192.168.0.1",
+    "auth_type": "mysql_native_password",
+    "privileges": [
+      {
+        "db_name": "abc",
+        "privileges": [
+          "SELECT",
+          "UPDATE"
+        ]
+      }
+    ]
+  }
+]
+
+
+
+
+
+
+

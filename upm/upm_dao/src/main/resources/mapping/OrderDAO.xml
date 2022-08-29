@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.OrderDAO">
+    <resultMap id="orderRM" type="com.bsg.upm.domain.OrderDO">
+        <id property="id" column="order_id" />
+        <result property="orderGroupId" column="order_og_id" />
+        <result property="type" column="order_type" />
+        <result property="majorVersion" column="order_major_version" />
+        <result property="minorVersion" column="order_minor_version" />
+        <result property="patchVersion" column="order_patch_version" />
+        <result property="buildVersion" column="order_build_version" />
+        <result property="archTypeCode" column="arch_type_code" />
+        <result property="unitCnt" column="unit_cnt" />
+        <result property="cpuCnt" column="order_cpu_cnt" />
+        <result property="memSize" column="order_mem_size" />
+        <result property="cnt" column="order_cnt" />
+        <result property="port" column="order_port" />
+        <result property="dataDirSize" column="order_data_dir_size" />
+        <result property="dataDirType" column="order_data_dir_type" />
+        <result property="dataDirPerformance" column="order_data_dir_performance" />
+        <result property="logDirSize" column="order_log_dir_size" />
+        <result property="logDirType" column="order_log_dir_type" />
+        <result property="logDirPerformance" column="order_log_dir_performance" />
+        <result property="networkBandwidth" column="order_network_bandwidth" />
+        <result property="networkHA" column="order_network_ha" />
+        <result property="clusterHA" column="order_cluster_ha" />
+        <result property="hostHA" column="order_host_ha" />
+        <result property="storageHA" column="order_storage_ha" />
+        <result property="cfgs" column="order_cfgs" />
+        <result property="preMajorVersion" column="order_pre_major_version" />
+        <result property="preMinorVersion" column="order_pre_minor_version" />
+        <result property="prePatchVersion" column="order_pre_patch_version" />
+        <result property="preBuildVersion" column="order_pre_build_version" />
+        <result property="preArchTypeCode" column="pre_arch_type_code" />
+        <result property="preUnitCnt" column="pre_unit_cnt" />
+        <result property="preCpuCnt" column="order_pre_cpu_cnt" />
+        <result property="preMemSize" column="order_pre_mem_size" />
+        <result property="preDataDirSize" column="order_pre_data_dir_size" />
+        <result property="preLogDirSize" column="order_pre_log_dir_size" />
+        <result property="preNetworkBandwidth" column="order_pre_network_bandwidth" />
+        <result property="preCnt" column="order_pre_cnt" />
+        <result property="schedule" column="order_schedule" />
+        <result property="hamode" column="order_hamode" />
+        <result property="hacontainer" column="order_hacontainer" />
+        <result property="architecture" column="order_architecture" />
+        <result property="imageId" column="imageId" />
+        <result property="proxyImageId" column="proxyImageId" />
+        <result property="cmhaImageId" column="cmhaImageId" />
+    </resultMap>
+    
+    <sql id="order">
+       o.id AS order_id,
+       o.order_group_id AS order_og_id,
+       o.type AS order_type,
+       o.major_version AS order_major_version,
+       o.minor_version AS order_minor_version,
+       o.patch_version AS order_patch_version,
+       o.build_version AS order_build_version,
+       o.build_version AS order_build_version,
+       o.arch_type_code AS arch_type_code,
+       o.unit_cnt AS unit_cnt,
+       o.cpu_cnt AS order_cpu_cnt,
+       o.mem_size AS order_mem_size,
+       o.port AS order_port,
+       o.cnt AS order_cnt,
+       o.data_dir_size AS order_data_dir_size,
+       o.data_dir_type AS order_data_dir_type,
+       o.data_dir_performance AS order_data_dir_performance,
+       o.log_dir_size AS order_log_dir_size,
+       o.log_dir_type AS order_log_dir_type,
+       o.log_dir_performance AS order_log_dir_performance,
+       o.network_bandwidth AS order_network_bandwidth,
+       o.network_ha AS order_network_ha,
+       o.host_ha AS order_host_ha,
+       o.cluster_ha AS order_cluster_ha,
+       o.storage_ha AS order_storage_ha,
+       o.cfgs AS order_cfgs,
+       o.pre_major_version AS order_pre_major_version,
+       o.pre_minor_version AS order_pre_minor_version,
+       o.pre_patch_version AS order_pre_patch_version,
+       o.pre_build_version AS order_pre_build_version,
+       o.pre_arch_type_code AS pre_arch_type_code,
+       o.pre_unit_cnt AS pre_unit_cnt,
+       o.pre_cpu_cnt AS order_pre_cpu_cnt,
+       o.pre_mem_size AS order_pre_mem_size,
+       o.pre_data_dir_size AS order_pre_data_dir_size,
+       o.pre_log_dir_size AS order_pre_log_dir_size,
+       o.pre_cnt AS order_pre_cnt,
+       o.pre_network_bandwidth AS order_pre_network_bandwidth,
+       o.schedule AS order_schedule,
+       o.hamode AS order_hamode,
+       o.hacontainer AS order_hacontainer,
+       o.architecture AS order_architecture,
+       o.imageId AS imageId,
+       o.proxyImageId AS proxyImageId,
+       o.cmhaImageId AS cmhaImageId
+    </sql>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.OrderDO"
+        >
+<!--         <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE"> -->
+<!--             select replace(uuid(),'-','') -->
+<!--             </selectKey> -->
+        INSERT INTO tbl_order
+        (
+        	id,
+            order_group_id,
+            type,
+            major_version, 
+            minor_version,
+            patch_version,
+            build_version,
+            <!-- arch_id, -->
+            arch_type_code,
+            unit_cnt,
+            cpu_cnt,
+            mem_size,
+            port,
+            cnt,
+            data_dir_size,
+            data_dir_type,
+            data_dir_performance,
+            log_dir_size,
+            log_dir_type,
+            log_dir_performance,
+            network_bandwidth,
+            network_ha,
+            host_ha,
+            cluster_ha,
+            storage_ha,
+            cfgs,
+            pre_major_version,
+            pre_minor_version,
+            pre_patch_version,
+            pre_build_version,
+            <!-- pre_arch_id, -->
+            pre_arch_type_code,
+            pre_unit_cnt,
+            pre_cpu_cnt,
+            pre_mem_size,
+            pre_data_dir_size,
+            pre_log_dir_size,
+            pre_cnt,
+            pre_network_bandwidth,
+            hamode,
+            schedule,
+            hacontainer,
+            architecture,
+            imageId,
+            proxyImageId,
+            cmhaImageId
+        )
+        VALUES
+        (
+        	#{id},
+            #{orderGroupId},
+            #{type},
+            #{majorVersion},
+            #{minorVersion},
+            #{patchVersion},
+            #{buildVersion},
+            <!-- #{archId}, -->
+            #{archTypeCode},
+            #{unitCnt},
+            #{cpuCnt},
+            #{memSize},
+            #{port},
+            #{cnt},
+            #{dataDirSize},
+            #{dataDirType},
+            #{dataDirPerformance},
+            #{logDirSize},
+            #{logDirType},
+            #{logDirPerformance},
+            #{networkBandwidth},
+            #{networkHA},
+            #{hostHA},
+            #{clusterHA},
+            #{storageHA},
+            #{cfgs},
+            #{preMajorVersion},
+            #{preMinorVersion},
+            #{prePatchVersion},
+            #{preBuildVersion},
+            <!-- #{preArchId}, -->
+            #{preArchTypeCode},
+            #{preUnitCnt},
+            #{preCpuCnt},
+            #{preMemSize},
+            #{preDataDirSize},
+            #{preLogDirSize},
+            #{preCnt},
+            #{preNetworkBandwidth},
+            #{hamode},
+            #{schedule},
+            #{hacontainer},
+            #{architecture},
+            #{imageId},
+            #{proxyImageId},
+            #{cmhaImageId}
+            
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE tbl_order
+        <set>
+            major_version = #{majorVersion},
+            minor_version = #{minorVersion},
+            patch_version = #{patchVersion},
+            build_version = #{buildVersion},
+            <!-- arch_id = #{archId}, -->
+            arch_type_code = #{archTypeCode},
+            unit_cnt = #{unitCnt},
+            cpu_cnt = #{cpuCnt},
+            mem_size = #{memSize},
+            port = #{port},
+            data_dir_size = #{dataDirSize},
+            data_dir_type = #{dataDirType},
+            log_dir_size = #{logDirSize},
+            log_dir_type = #{logDirType},
+            network_bandwidth = #{networkBandwidth},
+            network_ha = #{networkHA},
+            node_ha = #{nodeHA},
+            storage_ha = #{storageHA}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <select id="countByOrderGroupIdAndType" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_order
+        WHERE order_group_id = #{orderGroupId}
+            AND type = #{type}
+    </select>
+    
+    <update id="updateServId">
+        UPDATE tbl_order
+        <set>
+            serv_id = #{servId}
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="removeByOrderGroupId">
+        DELETE FROM tbl_order
+        WHERE order_group_id = #{orderGroupId}
+    </delete>
+    
+    <select id="selectByOrderGroupId" resultMap="orderRM">
+        SELECT 
+            <include refid="order" />
+        FROM tbl_order o 
+        WHERE  o.order_group_id = #{orderGroupId}
+    </select>
+    
+    
+</mapper>

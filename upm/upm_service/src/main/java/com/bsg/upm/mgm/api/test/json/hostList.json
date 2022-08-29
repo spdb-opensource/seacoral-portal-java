@@ -1,0 +1,218 @@
+[
+    {
+        "id": null,
+        "cluster": {
+            "id": null,
+            "name": null
+        },
+        "room": null,
+        "seat": null,
+        "storage_host": [
+            {
+                "performance": null,
+                "paths": null,
+                "capacity": null,
+                "used": null
+            }
+        ],
+        "storage_remote": {
+            "id": null,
+            "name": null
+        },
+        "node": {
+            "os": null,
+            "name": null,
+            "ip": null,
+            "cpu": {
+                "total": null,
+                "used": null
+            },
+            "memory": {
+                "capacity": null,
+                "used": null
+            },
+            "net_bandwidth": {
+                "capacity": null,
+                "used": null
+            }
+        },
+        "units": [
+            {
+                "id": null,
+                "name": null,
+                "type": null,
+                "cpu": null,
+                "memory": null,
+                "net_bandwidth": null,
+                "state": null
+            }
+        ],
+        "max_unit": null,
+        "max_usage": {
+            "cpu": null,
+            "memory": null,
+            "storage_host": null,
+            "net_bandwidth": null
+        },
+        "enabled": null,
+        "desc": null,
+        "task": {
+            "id": null,
+            "action": null,
+            "status": null
+        },
+        "created": {
+            "user": null,
+            "timestamp": null
+        },
+        "modified": {
+            "user": null,
+            "timestamp": null
+        }
+    },
+    {
+        "id": "xxxx",
+        "cluster": {
+            "id": "xxxx",
+            "name": "xxxx"
+        },
+        "room": "room",
+        "seat": "seat",
+        "storage_host": [
+            {
+                "performance": "high",
+                "paths": [
+                    "/dev/sdb",
+                    "/dev/sdc"
+                ],
+                "capacity": 100,
+                "used": 10
+            }
+        ],
+        "storage_remote": {
+            "id": "",
+            "name": "xxxx"
+        },
+        "node": {
+            "os": "xxxx",
+            "name": "xxxx",
+            "ip": "192.168.10.100",
+            "cpu": {
+                "total": 10,
+                "used": 3
+            },
+            "memory": {
+                "capacity": 100,
+                "used": 10
+            },
+            "net_bandwidth": {
+                "capacity": 100,
+                "used": 10
+            }
+        },
+        "units": [
+            {
+                "id": "xxxx",
+                "name": "xxx",
+                "type": "mysql",
+                "cpu": 10,
+                "memory": 10,
+                "net_bandwidth": 10,
+                "state": "xxx"
+            }
+        ],
+        "max_unit": 10,
+        "max_usage": {
+            "cpu": 80,
+            "memory": 80,
+            "storage_host": 80,
+            "net_bandwidth": 80
+        },
+        "enabled": true,
+        "desc": "xxxxxx",
+        "task": {
+            "id": "xxxxxx",
+            "action": "out",
+            "status": "success"
+        },
+        "created": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        },
+        "modified": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        }
+    },
+    {
+        "id": null,
+        "cluster": {
+            "id": null,
+            "name": null
+        },
+        "room": null,
+        "seat": null,
+        "storage_host": [
+            {
+                "performance": null,
+                "paths": null,
+                "capacity": null,
+                "used": null
+            }
+        ],
+        "storage_remote": {
+            "id": null,
+            "name": null
+        },
+        "node": {
+            "os": null,
+            "name": null,
+            "ip": null,
+            "cpu": {
+                "total": null,
+                "used": null
+            },
+            "memory": {
+                "capacity": null,
+                "used": null
+            },
+            "net_bandwidth": {
+                "capacity": null,
+                "used": null
+            }
+        },
+        "units": [
+            {
+                "id": null,
+                "name": null,
+                "type": null,
+                "cpu": null,
+                "memory": null,
+                "net_bandwidth": null,
+                "state": null
+            }
+        ],
+        "max_unit": null,
+        "max_usage": {
+            "cpu": null,
+            "memory": null,
+            "storage_host": null,
+            "net_bandwidth": null
+        },
+        "enabled": null,
+        "desc": null,
+        "task": {
+            "id": null,
+            "action": null,
+            "status": null
+        },
+        "created": {
+            "user": null,
+            "timestamp": null
+        },
+        "modified": {
+            "user": null,
+            "timestamp": null
+        }
+    }
+]

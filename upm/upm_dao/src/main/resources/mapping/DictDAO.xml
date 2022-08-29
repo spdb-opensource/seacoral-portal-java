@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.DictDAO">
+    <resultMap id="dictRM" type="com.bsg.upm.domain.DictDO">
+        <id property="id" column="dict_id" />
+        <result property="dictTypeCode" column="dict_dict_type_code" />
+        <result property="code" column="dict_code" />
+        <result property="name" column="dict_name" />
+        <result property="sequence" column="dict_sequence" />
+        <result property="gmtCreate" column="dict_gmt_create" />
+        <result property="creator" column="dict_creator" />
+        <result property="gmtModified" column="dict_gmt_modified" />
+        <result property="editor" column="dict_editor" />
+    </resultMap>
+    
+    <sql id="dict">
+        dict.id AS dict_id,
+        dict.dict_type_code AS dict_dict_type_code,
+        dict.code AS dict_code,
+        dict.name AS dict_name,
+        dict.sequence AS dict_sequence,
+        dict.gmt_create AS dict_gmt_create,
+        dict.creator AS dict_creator,
+        dict.gmt_modified AS dict_gmt_modified,
+        dict.editor AS dict_editor
+    </sql>
+
+    <select id="get" resultMap="dictRM">
+        SELECT 
+            <include refid="dict" />
+        FROM tbl_dict dict
+        WHERE dict.id = #{id}
+    </select>
+    
+    <select id="listByDictTypeCode" resultMap="dictRM">
+        SELECT 
+            <include refid="dict" />
+        FROM tbl_dict dict
+        WHERE dict.dict_type_code = #{dictTypeCode}
+    </select>
+
+    <select id="getNameByCodeAndDictTypeCode" resultType="string">
+        SELECT name
+        FROM tbl_dict
+        WHERE code = #{code}
+            AND dict_type_code = #{dictTypeCode}
+    </select>
+
+    <select id="countByCodeAndDictTypeCode" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_dict
+        WHERE code = #{code}
+            AND dict_type_code = #{dictTypeCode}
+    </select>
+
+    <select id="countByNameAndDictTypeCode" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_dict
+        WHERE name = #{name}
+            AND dict_type_code = #{dictTypeCode}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.DictDO"
+        >
+        INSERT INTO tbl_dict
+        (
+        	id,
+            dict_type_code,
+            code,
+            name,
+            sequence,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+        	#{id},
+            #{dictTypeCode},
+            #{code},
+            #{name},
+            #{sequence},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.bsg.upm.domain.DictDO">
+        UPDATE tbl_dict
+        <set>
+            name = #{name},
+            sequence = #{sequence},
+            gmt_modified = #{gmtModified},
+            editor = #{editor}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="remove">
+        DELETE FROM tbl_dict
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="removeByDictTypeCode">
+        DELETE FROM tbl_dict
+        WHERE dict_type_code = #{dictTypeCode}
+    </delete>
+
+</mapper>

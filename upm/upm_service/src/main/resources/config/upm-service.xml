@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache-4.1.xsd">
+
+	<!-- 自动扫描的包名 -->
+	<context:component-scan base-package="com.bsg.upm.service" />
+	<context:component-scan base-package="com.bsg.upm.check" />
+	<context:component-scan base-package="com.bsg.upm.mgm.api" />
+	<context:component-scan base-package="com.bsg.upm.horus.api" />
+	<context:component-scan base-package="com.bsg.upm.util" />
+	<!-- 默认的注解映射的支持 -->
+	<context:annotation-config />
+
+	<!-- Spring 多线程配置 START -->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数 -->
+		<property name="corePoolSize" value="300" />
+		<!-- 队列最大长度 >=mainExecutor.maxSize -->
+		<property name="queueCapacity" value="500" />
+		<!-- 线程池维护线程所允许的空闲时间 -->
+		<property name="keepAliveSeconds" value="10" />
+		<!-- 允许核心线程超时 -->
+		<property name="allowCoreThreadTimeOut" value="true"></property>
+		<!-- 线程池对拒绝任务(无线程可用)的处理策略 ThreadPoolExecutor.CallerRunsPolicy策略 ,调用者的线程会执行该任务,如果执行器已关闭,则丢弃. -->
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+		</property>
+	</bean>
+	<!-- Spring 多线程配置 END -->
+
+	<import resource="classpath:config/spring-mybatis.xml" />
+</beans>

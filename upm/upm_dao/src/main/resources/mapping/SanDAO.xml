@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.SanDAO">
+    <resultMap id="sanRM" type="com.bsg.upm.domain.SanDO">
+        <id property="id" column="san_id" />
+        <result property="siteId" column="site_id" />
+        <result property="sanVendorId" column="san_vendor_id" />
+        <result property="name" column="san_name" />
+        <result property="description" column="san_description" />
+        <result property="relateId" column="san_relate_id" />
+        <result property="gmtCreate" column="san_gmt_create" />
+        <result property="creator" column="san_creator" />
+        <association property="sanVendor"
+            resultMap="com.bsg.upm.dao.SanVendorDAO.sanVendorRM" />
+        <association property="site"
+            resultMap="com.bsg.upm.dao.SiteDAO.siteRM" />
+    </resultMap>
+    
+    <sql id="san_p1">
+        san.id AS san_id,
+        san.name AS san_name
+    </sql>
+    
+    <sql id="san">
+        <include refid="san_p1" />,
+        san.description AS san_description,
+        san.relate_id AS san_relate_id,
+        san.gmt_create AS san_gmt_create,
+        san.creator AS san_creator
+    </sql>
+    
+    <select id="list" resultMap="sanRM">
+        SELECT 
+            <include refid="san" />,
+            <include refid="com.bsg.upm.dao.SanVendorDAO.san_vendor" />
+        FROM tbl_san san, 
+            tbl_san_vendor sv,
+            tbl_site site 
+        WHERE san.san_vendor_id = sv.id 
+            AND san.site_id = site.id
+            <if test="siteId != null">
+                AND site.id = #{siteId}
+            </if>
+        ORDER BY san.id DESC    
+    </select>
+    
+    <select id="get" resultMap="sanRM">
+        SELECT 
+            <include refid="san" />,
+            <include refid="com.bsg.upm.dao.SanVendorDAO.san_vendor" />
+        FROM tbl_san san, 
+            tbl_san_vendor sv,
+            tbl_site site 
+        WHERE san.san_vendor_id = sv.id 
+            AND san.site_id = site.id
+            AND san.id = #{id}
+    </select>
+
+    <select id="getByNameAndSiteId" resultMap="sanRM">
+        SELECT 
+            <include refid="san" />
+        FROM tbl_san san
+        WHERE san.name = #{name}
+            AND san.site_id = #{siteId}
+    </select>
+    
+    <select id="countBySiteId" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_san
+        WHERE site_id = #{siteId}
+    </select>
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.SanDO">
+        INSERT INTO tbl_san
+        (
+            site_id,
+            san_vendor_id,         
+            name,
+            description,
+            relate_id,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+            #{siteId},
+            #{sanVendorId},        
+            #{name},
+            #{description},
+            #{relateId},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <delete id="remove">
+        DELETE FROM tbl_san
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

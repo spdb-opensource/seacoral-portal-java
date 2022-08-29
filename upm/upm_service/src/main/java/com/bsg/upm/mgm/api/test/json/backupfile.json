@@ -1,0 +1,29 @@
+[{
+	"site": {
+		"id": "xxxxx",
+		"name": "site001"
+	},
+	"id": "xxxxxxx",
+	"name": "{{unit_name}}-YYYYMMDD-HHmm",
+	"unit": {
+		"id": "xxxxx",
+		"name": "unit001"
+	},
+	"app": {
+		"id": "xxxxx",
+		"name": "app001"
+	},
+	"backup_storage": {
+		"id": "xxxxx",
+		"type": "remote",
+		"name": "storage001"
+	},
+	"path": "/xxx/yyy",
+	"type": "full",
+	"size": 10240,
+	"retention": 3,
+	"created_at": "yyyy-mm-dd hh:mm:ss",
+	"finish_at": "yyyy-mm-dd hh:mm:ss",
+	"valid": true,
+	"created_user": "user001"
+}]

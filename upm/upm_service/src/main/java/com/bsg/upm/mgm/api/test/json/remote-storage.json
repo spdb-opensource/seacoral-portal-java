@@ -1,0 +1,73 @@
+[
+  {
+		"id": "100",
+		"name": "storage001",
+		"site": {
+			"id": "1",
+			"name": "xxxx01"
+		},
+		"vendor": "HUAWEI",
+		"model": "OceanStorV3",
+		"type": "s1",
+		"capacity": 10000,
+		"used": 900,
+		"status": "passing",
+		"enabled": true,
+		"task": {
+			"id": "xxxx01",
+			"action": "start",
+			"status": "not_running"
+		},
+		"auth": {
+		  "ip": "1.2.3.4",
+		  "port": "25",
+		  "username": "uu1"
+		},
+		"desc": "xxxxx001",
+		"created": {
+			"user": "xxx",
+			"timestamp": "yyyy-mm-dd hh:mm:ss"
+		},
+		"modified": {
+			"user": "xxx",
+			"timestamp": "yyyy-mm-dd hh:mm:ss"
+		}
+	},
+	{
+        "id": "200",
+        "name": "storage002",
+        "site": {
+            "id": "1",
+            "name": "xxxx01"
+        },
+        "vendor": "HUAWEI",
+        "model": "OceanStorV3",
+        "type": "s1",
+        "capacity": 10000,
+        "used": 900,
+        "status": "critacl",
+        "enabled": false,
+        "task": {
+            "id": "xxxx02",
+            "action": "start",
+            "status": "not_running"
+        },
+        "auth": {
+          "ip": "2.2.3.4",
+          "port": "20",
+          "username": "uu2"
+        },
+        "desc": "xxxxx002",
+        "created": {
+            "user": "xx02",
+            "timestamp": "2019-07-11 12:25:32"
+        },
+        "modified": {
+            "user": "xx03",
+            "timestamp": "2019-07-12 12:25:32"
+        }
+    },
+    {
+        "id": "300"
+    }
+]

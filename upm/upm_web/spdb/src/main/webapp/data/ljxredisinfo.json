@@ -1,0 +1,11 @@
+[
+  {"name": "redis service",
+  "id": "111",
+  "owner": "tenant",
+  "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+  "software": "redis_5.1.1",
+  "architecture": "集群分片3节点0副本",
+  "scale": "S--2G",
+  "state": "false"
+  }
+]

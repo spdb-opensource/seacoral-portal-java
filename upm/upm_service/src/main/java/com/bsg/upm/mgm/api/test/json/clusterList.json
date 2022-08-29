@@ -1,0 +1,89 @@
+[
+    {
+        "id": "ggggggg",
+        "name": "test-cluster001",
+        "site": {
+            "id": "xxxx",
+            "name": "xxxx"
+        },
+        "zone": "area1",
+        "image_type": [
+            "mysql",
+            "redis"
+        ],
+        "ha_tag": "xxx",
+        "network": [
+            {
+                "id": "xxxx",
+                "name": "network001"
+            }
+        ],
+        "enabled": true,
+        "desc": "xxxxxxxx",
+        "created": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        },
+        "modified": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        }
+    },
+    {
+        "id": "xxxx",
+        "name": "test-cluster001",
+        "site": {
+            "id": "xxxx",
+            "name": "xxxx"
+        },
+        "zone": "area2",
+        "image_type": [
+            "mysql",
+            "redis"
+        ],
+        "ha_tag": "xxx",
+        "network": [
+            {
+                "id": "xxxx",
+                "name": "network001"
+            }
+        ],
+        "enabled": true,
+        "desc": "xxxxxxxx",
+        "created": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        },
+        "modified": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        }
+    },
+    {
+        "id": null,
+        "name": null,
+        "site": {
+            "id": null,
+            "name": null
+        },
+        "zone": null,
+        "image_type": null,
+        "ha_tag": null,
+        "network": [
+            {
+                "id": null,
+                "name": null
+            }
+        ],
+        "enabled": null,
+        "desc": null,
+        "created": {
+            "user": null,
+            "timestamp": null
+        },
+        "modified": {
+            "user": null,
+            "timestamp": null
+        }
+    }
+]

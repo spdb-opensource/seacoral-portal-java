@@ -1,0 +1,102 @@
+[
+  {
+    "name": "test-data-from-json",
+    "id": "11111",
+    "type": "test-type",
+    "IP": "192.168.101.1",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/bbb/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "100G",
+    "grossCapacity": "200G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type1"
+  },
+  {
+    "name": "test-data-from-json-2",
+    "id": "11112",
+    "type": "test-type",
+    "IP": "192.168.103.1",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/bbb/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "200G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type3"
+
+  },
+  {
+    "name": "test-data-from-json-3",
+    "id": "11113",
+    "type": "test-type",
+    "IP": "192.168.103.1",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/bbb/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "240G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type1"
+  },
+  {
+    "name": "test-data-from-json-4",
+    "id": "11114",
+    "type": "test-type",
+    "IP": "192.168.103.4",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/ccc/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "240G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type2"
+  },
+  {
+    "name": "test-data-from-json-5",
+    "id": "11115",
+    "type": "test-type",
+    "IP": "192.168.255.1",
+    "sourceDir": "/aaa/ccc/ccc",
+    "mountDir": "/aaa/ccc/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "240G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type4"
+  },
+  {
+    "name": "test-data-from-json-6",
+    "id": "11116",
+    "type": "test-type",
+    "IP": "192.168.103.6",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/bbb/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "240G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type1"
+  },
+  {
+    "name": "test-data-from-json-7",
+    "id": "11117",
+    "type": "test-type",
+    "IP": "192.168.103.117",
+    "sourceDir": "/aaa/bbb/ccc",
+    "mountDir": "/aaa/ccc/ccc",
+    "mountPara": "test-Para",
+    "spareCapacity": "120G",
+    "grossCapacity": "240G",
+    "state": "1",
+    "info":"region-management-info",
+    "backup":"type3"
+  }
+]
+

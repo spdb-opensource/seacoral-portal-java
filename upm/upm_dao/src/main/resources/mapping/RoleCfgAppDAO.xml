@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.RoleCfgAppDAO">
+    <resultMap id="appRM" type="com.bsg.upm.domain.RoleCfgAppDO">
+        <id property="id" column="app_id" />
+        <result property="roleId" column="app_role_id" />
+        <result property="appId" column="app_app_id" />
+    </resultMap>
+    
+    <sql id="app">
+        capp.id AS app_id,
+        capp.role_id AS app_role_id,
+        capp.app_id AS app_app_id
+    </sql>
+    
+    <select id="list" resultMap="appRM">
+        SELECT 
+            <include refid="app" />
+        FROM tbl_role_cfg_app capp
+    </select>
+
+    <select id="listByRoleId" resultMap="appRM">
+        SELECT 
+            <include refid="app" />
+        FROM tbl_role_cfg_app capp
+        WHERE capp.role_id = #{roleId}
+    </select>
+
+	<insert id="save" parameterType="com.bsg.upm.domain.RoleCfgAppDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_role_cfg_app
+        (
+        	id,
+            role_id,
+            app_id
+        )
+        VALUES
+        (
+        	#{id},
+            #{roleId},
+            #{appId}
+        )
+    </insert>
+    
+    <delete id="removeByRoleId">
+        DELETE FROM tbl_role_cfg_app
+        WHERE role_id = #{roleId}
+    </delete>
+</mapper>

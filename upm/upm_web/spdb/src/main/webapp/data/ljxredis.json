@@ -1,0 +1,57 @@
+[
+  {
+    "name": "redis service",
+    "id": "111",
+    "owner": "tenant",
+    "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+    "software": "redis_5.1.1",
+    "architecture": "1主1备",
+    "scale": "S型(1核2G)",
+    "state": "false",
+    "state2":"passing"
+  },
+  {
+    "name": "redis service",
+    "id": "112",
+    "owner": "tenant",
+    "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+    "software": "redis_5.1.1",
+    "architecture": "集群分片3节点0副本",
+    "scale": "S型(1核2G)",
+    "state": "false",
+    "state2":"passing"
+  },
+  {
+    "name": "redis service",
+    "id": "113",
+    "owner": "tenant",
+    "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+    "software": "redis_5.1.1",
+    "architecture": "1主1备",
+    "scale": "S型(1核2G)",
+    "state": "false",
+    "state2":"passing"
+  },
+  {
+    "name": "redis service",
+    "id": "114",
+    "owner": "tenant",
+    "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+    "software": "redis_3.2.8",
+    "architecture": "1主1备",
+    "scale": "S型(1核2G)",
+    "state": "false",
+    "state2":"passing"
+  },
+  {
+    "name": "redis service",
+    "id": "115",
+    "owner": "tenant",
+    "apn": "192.168.30.104:637 192.168.30.103:637 192.168.30.102:637",
+    "software": "redis_3.2.8",
+    "architecture": "集群分片3节点0副本",
+    "scale": "S型(1核2G)",
+    "state": "false",
+    "state2":"passing"
+  }
+]

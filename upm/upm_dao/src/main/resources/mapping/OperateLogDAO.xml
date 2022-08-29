@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.OperateLogDAO">
+    <resultMap id="operateLogRM" type="com.bsg.upm.domain.OperateLogDO">
+        <id property="id" column="id" />
+        <result property="objType" column="obj_type" />
+        <result property="action" column="action" />
+        <result property="objName" column="obj_name" />
+        <result property="description" column="description" />
+        <result property="uptime" column="uptime" />
+        <result property="success" column="is_success" />
+        <result property="errorMsg" column="error_msg" />
+        <result property="siteId" column="site_id" />
+        <result property="gmtCreate" column="gmt_create" />
+        <result property="creator" column="creator" />
+<!--         <association property="site" -->
+<!--             resultMap="com.bsg.upm.dao.SiteDAO.siteRM" /> -->
+    </resultMap>
+
+    <select id="list" resultMap="operateLogRM">
+        SELECT log.id,
+            log.obj_type,
+            log.action,
+            log.obj_name,
+            log.description,
+            log.uptime,
+            log.is_success,
+            log.error_msg,
+            log.gmt_create,
+            log.creator
+            <!-- ,
+            site.id AS site_id,
+            site.name AS site_name -->
+        FROM tbl_operate_log log 
+<!--             LEFT JOIN tbl_site site ON log.site_id = site.id -->
+        <where>
+<!--             <if test="siteId != null"> -->
+<!--                 AND (log.site_id = #{siteId} OR log.site_id IS NULL) -->
+<!--             </if> -->
+            <if test="objType != null">
+                AND log.obj_type LIKE CONCAT('%', #{objType}, '%')
+            </if>
+            <if test="startDate != null">
+                AND log.gmt_create >= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND log.gmt_create <![CDATA[ <= ]]> #{endDate}
+            </if>
+        </where>
+        ORDER BY log.gmt_create DESC
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.OperateLogDO">
+        INSERT INTO tbl_operate_log
+        (
+        id,
+            obj_type,
+            action,
+            obj_name,
+            description,
+            uptime,
+            is_success,
+            error_msg,
+            site_id,
+            gmt_create,
+            creator
+        )
+        VALUES
+        (
+        	#{id},
+            #{objType},
+            #{action},
+            #{objName},
+            #{description},
+            #{uptime},
+            #{success},
+            #{errorMsg},
+            #{siteId},
+            #{gmtCreate},
+            #{creator}
+        )
+    </insert>
+    
+    <delete id="removeBeforeDatetime">
+        DELETE FROM tbl_operate_log
+        WHERE gmt_create <![CDATA[<= ]]> #{datetime}
+    </delete>
+    
+    <delete id="removeBySiteId">
+        DELETE FROM tbl_operate_log
+        WHERE site_id = #{siteId}
+    </delete>
+
+</mapper>

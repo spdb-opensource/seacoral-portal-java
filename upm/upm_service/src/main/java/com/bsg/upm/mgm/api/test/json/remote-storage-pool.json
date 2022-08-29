@@ -1,0 +1,89 @@
+[
+	{
+		"id": "101",
+		"name": "storage_pool001",
+		"storage": {
+			"id": "100",
+			"name": "storage001"
+		},
+		"native_id": "xxxx",
+		"type": "rg1",
+		"performance": "high",
+		"capacity": 99999,
+		"used": 90,
+		"enabled": true,
+		"desc": "xxxxxxxx",
+		"task": {
+			"id": "xxxxxx",
+			"action": "start",
+			"status": "not_running"
+		},
+		"created": {
+			"user": "xx01",
+			"timestamp": "2019-07-09 12:12:52"
+		},
+		"modified": {
+			"user": "xx02",
+			"timestamp": "2019-07-09 23:12:14"
+		}
+	},
+	{
+		"id": "102",
+		"name": "storage_pool002",
+		"storage": {
+			"id": "100",
+			"name": "storage002"
+		},
+		"native_id": "xxxx",
+		"type": "data",
+		"performance": "medium",
+		"capacity": 99999,
+		"used": 90,
+		"enabled": false,
+		"desc": "xxxxxxxx",
+		"task": {
+			"id": "xxxxxx",
+			"action": "start",
+			"status": "not_running"
+		},
+		"created": {
+			"user": "xx01",
+			"timestamp": "2019-07-09 12:12:52"
+		},
+		"modified": {
+			"user": "xx02",
+			"timestamp": "2019-07-09 23:12:14"
+		}
+	},
+	{
+		"id": "103",
+		"name": "storage_pool003",
+		"storage": {
+			"id": "100",
+			"name": "storage001"
+		},
+		"native_id": "xxxx",
+		"type": "backup",
+		"performance": "low",
+		"capacity": 99999,
+		"used": 90,
+		"enabled": true,
+		"desc": "xxxxxxxx",
+		"task": {
+			"id": "xxxxxx",
+			"action": "start",
+			"status": "not_running"
+		},
+		"created": {
+			"user": "xx01",
+			"timestamp": "2019-07-09 12:12:52"
+		},
+		"modified": {
+			"user": "xx02",
+			"timestamp": "2019-07-09 23:12:14"
+		}
+	},
+	{
+		"id": "104"
+	}
+]

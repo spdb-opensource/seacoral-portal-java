@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.SchemaDAO">
+    <resultMap id="schemaRM" type="com.bsg.upm.domain.SchemaDO">
+        <id property="id" column="id" />
+        <result property="dbname" column="dbname" />
+        <result property="characterSet" column="characterSet" />
+    </resultMap>
+
+    <sql id="schema">
+        u.id AS schema_id,
+        u.dbname,
+        u.characterSet
+    </sql>
+
+    <select id="list" resultMap="schemaRM">
+        SELECT 
+            id,
+            dbname,
+            characterSet
+        FROM tbl_schema s 
+                LEFT JOIN tbl_order go ON o.id = s.id
+    </select>
+    
+    
+    <insert id="save" parameterType="com.bsg.upm.domain.SchemaDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_schema
+        (
+        	id,
+            dbname,
+            characterSet
+        )
+        VALUES
+        (
+        	#{id},
+            #{dbname},
+            #{characterSet}
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.bsg.upm.domain.SchemaDO">
+        UPDATE tbl_schema
+        <set>
+            dbname = #{dbname},
+            characterSet = #{characterSet}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="removeschemaByDbname">
+        DELETE s   tbl_schema s
+        WHERE s.dbname = {dbname}
+    </delete>
+
+</mapper>

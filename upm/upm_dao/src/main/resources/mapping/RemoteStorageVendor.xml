@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.RemoteStorageVendorDAO">
+    <resultMap id="remoteStorageVendorRM" type="com.bsg.upm.domain.RemoteStorageVendorDO">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="code" column="code" />
+        <result property="version" column="version" />
+    </resultMap>
+    
+    <sql id="remote_storage_vendor">
+        sv.id AS id,
+        sv.name AS name,
+        sv.code AS code,
+        sv.version AS version
+    </sql>
+    
+    <select id="list" resultMap="remoteStorageVendorRM">
+        SELECT 
+            <include refid="remote_storage_vendor" />
+        FROM tbl_storage_remote_vendor sv
+    </select>
+
+    <select id="get" resultMap="remoteStorageVendorRM">
+        SELECT 
+            <include refid="remote_storage_vendor" />
+        FROM tbl_storage_remote_vendor sv
+        WHERE sv.id = #{id}
+    </select>
+    
+    <select id="getByCodeAndVersion" resultMap="remoteStorageVendorRM">
+        SELECT 
+            <include refid="remote_storage_vendor" />
+        FROM tbl_storage_remote_vendor sv
+        WHERE sv.code = #{code} and sv.version = #{version} 
+    </select>
+</mapper>

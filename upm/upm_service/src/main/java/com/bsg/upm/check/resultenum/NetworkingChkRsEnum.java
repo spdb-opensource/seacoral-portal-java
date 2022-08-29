@@ -1,0 +1,116 @@
+package com.bsg.upm.check.resultenum;
+
+public enum NetworkingChkRsEnum implements ChkRsInterface {
+
+    SUCCESS(OK, "OK"),
+
+    ILLEGAL_ID_NOT_EXIST(NETWORKING, "该网段(id:{})不存在。"),
+
+    ADD_ILLEGAL_SITE_ID_MUST_NOT_BE_NULL(NETWORKING + 11011, "站点ID不能为空。"),
+    ADD_ILLEGAL_POD_ID_MUST_NOT_BE_NULL(NETWORKING + 11014, "POD_ID不能为空。"),
+    ADD_ILLEGAL_SITE_ID_NOT_EXIST(NETWORKING + 11012, "该站点(id:{})不存在。"),
+
+    ADD_ILLEGAL_NAME_MUST_NOT_BE_BLANK(NETWORKING + 11021, "网段名称不能为空。"), 
+    ADD_ILLEGAL_NAME_EXIST(NETWORKING + 11022, "该网段名称({})已存在。"),
+
+    ADD_ILLEGAL_START_IP_MUST_NOT_BE_BLANK(NETWORKING + 11031, "起始IP不能为空。"), 
+    ADD_ILLEGAL_START_IP_FORMAT_ERROR(NETWORKING + 11032, "起始IP({})格式错误。"), 
+
+    ADD_ILLEGAL_END_IP_MUST_NOT_BE_BLANK(NETWORKING + 11041, "结束IP不能为空。"), 
+    ADD_ILLEGAL_END_IP_FORMAT_ERROR(NETWORKING + 11042, "结束IP({})格式错误。"), 
+    ADD_ILLEGAL_END_IP_NOT_SAME_SEGMENT(NETWORKING + 11043, "起始IP({})和结束IP({})必须在同一网段内。"), 
+    ADD_ILLEGAL_END_IP_MUST_NOT_BE_LESS_THAN_START_IP(NETWORKING + 11044, "结束IP({})不能小于起始IP({})。"), 
+    ADD_ILLEGAL_IP_SEGMENT_EXIST(NETWORKING + 11045, "网段范围已存在。"),
+
+    ADD_ILLEGAL_GATEWAY_MUST_NOT_BE_BLANK(NETWORKING + 11051, "网关不能为空。"), 
+    ADD_ILLEGAL_GATEWAY_FORMAT_ERROR(NETWORKING + 11052, "网关({})格式错误。"), 
+
+    ADD_ILLEGAL_MASK_MUST_NOT_BE_NULL(NETWORKING + 11061, "掩码不能为空。"), 
+
+    ADD_ILLEGAL_VLAN_ID_MUST_NOT_BE_NULL(NETWORKING + 11071, "VLAN ID不能为空。"), 
+
+    ADD_ILLEGAL_CLUSTER_ID_NOT_EXIST(NETWORKING + 11082, "该集群(id:{})不存在。"),
+    ADD_ILLEGAL_CLUSTER_ID_NOT_MATCH(NETWORKING + 11083, "该站点({})下集群({})不存在。"), 
+    ADD_ILLEGAL_CLUSTER_DISABLED(NETWORKING + 11084, "该集群({})已停用。"), 
+
+
+    UPDATE_ILLEGAL_ENABLED(NETWORKING + 12001, "该网段({})已启用，无法编辑。"),
+
+    UPDATE_ILLEGAL_NAME_MUST_NOT_BE_EMPTY(NETWORKING + 12021, "网段名称不能为空。"), 
+    UPDATE_ILLEGAL_NAME_EXIST(NETWORKING + 12022, "该网段名称({})已存在。"),
+
+    UPDATE_ILLEGAL_START_IP_MUST_NOT_BE_EMPTY(NETWORKING + 12031, "起始IP不能为空。"), 
+    UPDATE_ILLEGAL_START_IP_FORMAT_ERROR(NETWORKING + 12032, "起始IP({})格式错误。"), 
+
+    UPDATE_ILLEGAL_END_IP_MUST_NOT_BE_EMPTY(NETWORKING + 12041, "结束IP不能为空。"), 
+    UPDATE_ILLEGAL_END_IP_FORMAT_ERROR(NETWORKING + 12042, "结束IP({})格式错误。"), 
+    UPDATE_ILLEGAL_END_IP_NOT_SAME_SEGMENT(NETWORKING + 12043, "起始IP({})和结束IP({})必须在同一网段内。"), 
+    UPDATE_ILLEGAL_END_IP_MUST_NOT_BE_LESS_THAN_START_IP(NETWORKING + 12044,  "结束IP({})不能小于起始IP({})。"), 
+    UPDATE_ILLEGAL_IP_SEGMENT_EXIST(NETWORKING + 12045, "网段范围已存在。"),
+
+    UPDATE_ILLEGAL_GATEWAY_MUST_NOT_BE_EMPTY(NETWORKING + 12051, "网关不能为空。"), 
+    UPDATE_ILLEGAL_GATEWAY_FORMAT_ERROR(NETWORKING + 12052, "网关({})格式错误。"), 
+
+
+    UPDATE_ILLEGAL_CLUSTER_ID_NOT_EXIST(NETWORKING + 12082, "该集群(id:{})不存在。"),
+    UPDATE_ILLEGAL_CLUSTER_ID_NOT_MATCH(NETWORKING + 12083, "该站点({})下集群({})不存在。"), 
+    UPDATE_ILLEGAL_CLUSTER_DISABLED(NETWORKING + 12084, "该集群({})已停用。"), 
+
+    IN_ILLEGAL_BECAUSE_ALREADY_IN(NETWORKING + 13001, "该网段({})已入库，无法入库。"),
+
+    OUT_ILLEGAL_BECAUSE_ALREADY_OUT(NETWORKING + 14001, "该网段({})已出库，无法出库。"),
+
+    ENABLED_ILLEGAL_BECAUSE_OUT(NETWORKING + 15001, "该网段({})未入库，无法启用。"),
+
+    DISABLED_ILLEGAL_BECAUSE_OUT(NETWORKING + 16001, "该网段({})未入库，无法停用。"),
+
+    REMOVE_ILLEGAL_BECAUSE_IN(NETWORKING + 99001, "该网段({})已入库，无法删除。"),
+    REMOVE_ILLEGAL_WITH_ENABLED(NETWORKING + 99002, "该网段({})已启用，无法删除。"),
+
+    UPLOAD_ILLEGAL_SITE_ID_NOT_EXIST(CLUSTER + 90001, "该站点(id:{})不存在。"),
+    UPLOAD_NO_DATA(NETWORKING + 90002, "模板无数据。"),
+
+    UPLOAD_NETWORKING_NAME_MUST_NOT_BE_EMPTY(NETWORKING + 98011, "模板格式错误：第{}行 网段名称不能为空。"), 
+    UPLOAD_NETWORKING_NAME_REPEATED(NETWORKING + 98012, "模板格式错误：第{}行和第{}行 网段名称重复。"), 
+    UPLOAD_NETWORKING_NAME_EXIST(NETWORKING + 98013, "模板格式错误：第{}行 网段名称已存在。"), 
+
+    UPLOAD_START_IP_MUST_NOT_BE_BLANK(NETWORKING + 98021, "模板格式错误：第{}行 起始IP不能为空。"),
+    UPLOAD_START_IP_FORMAT_ERROR(NETWORKING + 98022, "模板格式错误：第{}行 起始IP格式错误。"), 
+
+    UPLOAD_END_IP_MUST_NOT_BE_BLANK(NETWORKING + 98031, "模板格式错误：第{}行 结束IP不能为空。"),
+    UPLOAD_END_IP_FORMAT_ERROR(NETWORKING + 98032, "模板格式错误：第{}行 结束IP格式错误。"), 
+    UPLOAD_END_IP_NOT_SAME_SEGMENT(NETWORKING + 98033, "模板格式错误：第{}行 起始IP和结束IP必须在同一网段内。"), 
+    UPLOAD_END_IP_MUST_NOT_BE_LESS_THAN_START_IP(NETWORKING + 98034, "模板格式错误：第{}行 结束IP不能小于起始IP。"), 
+    UPLOAD_IP_SEGMENT_EXIST(NETWORKING + 98035, "模板格式错误：第{}行和第{}行 网段范围重复。"),
+
+    UPLOAD_GATEWAY_MUST_NOT_BE_BLANK(NETWORKING + 98041, "模板格式错误：第{}行 网关不能为空。"),
+    UPLOAD_GATEWAY_FORMAT_ERROR(NETWORKING + 98042, "模板格式错误：第{}行 网关格式错误。"),
+
+    UPLOAD_MASK_MUST_NOT_BE_BLANK(NETWORKING + 98051, "模板格式错误：第{}行 掩码不能为空。"),
+    UPLOAD_MASK_FORMAT_ERROR(NETWORKING + 98062, "模板格式错误：第{}行 掩码格式错误(必须为数字)。"),
+
+    UPLOAD_VLAN_ID_MUST_NOT_BE_BLANK(NETWORKING + 98061, "模板格式错误：第{}行 VLAN ID不能为空。"),
+    UPLOAD_VLAN_ID_FORMAT_ERROR(NETWORKING + 98062, "模板格式错误：第{}行 VLAN ID格式错误(必须为数字)。"),
+
+    UPLOAD_CLUSTER_NAME_NOT_EXIST(NETWORKING + 98072, "模板格式错误：第{}行 集群名称不能为空。"),
+    UPLOAD_CLUSTER_DISABLED(NETWORKING + 98073, "模板格式错误：第{}行 集群已停用。");
+
+    private int code;
+    private String msg;
+
+    private NetworkingChkRsEnum(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    @Override
+    public int getCode() {
+        return this.code;
+    }
+
+    @Override
+    public String getMsg() {
+        return this.msg;
+    }
+
+}

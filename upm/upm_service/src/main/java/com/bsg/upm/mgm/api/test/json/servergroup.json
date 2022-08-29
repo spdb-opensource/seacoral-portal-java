@@ -1,0 +1,128 @@
+[{
+	"id": "1",
+	"name": "app001",
+	"desc": "xxxxxxxx",
+	"task": {
+		"id": "2",
+		"action": "xxxxx",
+		"status": "xxxxx"
+	},
+	"created": {
+		"user": "xxx",
+		"timestamp": "yyyy-mm-dd hh:mm:ss"
+	},
+	"modified": {
+		"user": "xxx",
+		"timestamp": "yyyy-mm-dd hh:mm:ss"
+	},
+	"state": "passing",
+	"status": {
+		"database": {
+			"services": [{
+				"name": "part1",
+				"arch": {
+					"mode": "single",
+					"replicas": 1
+				},
+				"ports": [{
+					"name": "server",
+					"port": 3306
+				}],
+				"units": [{
+					"id": "app001-database-XXXXXXXX",
+					"image": {
+						"id": "xxxxx",
+						"type": "upredis",
+						"major": 2,
+						"minor": 0,
+						"patch": 0,
+						"build": 51
+					},
+					"resources": {
+						"cpu": 0.5,
+						"memory": 1000,
+						"net_bandwidth": 100,
+						"storage": {
+							"type": "remote",
+							"performance": "high",
+							"volumes": [{
+								"type": "data",
+								"capacity": 2000
+							},
+							{
+								"type": "log",
+								"capacity": 1000
+							}]
+						}
+					},
+					"ip": "192.168.1.1",
+					"node": {
+						"cluster": {
+							"id": "3",
+							"name": ""
+						},
+						"id": "node-xxx",
+						"name": "xxxxx",
+						"host_ip": "192.168.2.44"
+					},
+					"state": "passing",
+					"pod_state": "running/pending",
+					"start_at": "yyyy-mm-dd hh:mm:ss"
+				}]
+			}]
+		}
+	},
+	"spec": {
+		"database": {
+			"image": {
+				"id": "xxxxx"
+			},
+			"services": {
+				"num": 1,
+				"arch": {
+					"mode": "single",
+					"replicas": 1
+				},
+				"ports": [{
+					"name": "server",
+					"port": 3306
+				}],
+				"conditions": {
+					"cluster": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"host": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"storage_remote": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					},
+					"network": {
+						"candidates_id": ["string"],
+						"high_availability": true
+					}
+				},
+				"units": {
+					"resources": {
+						"requests": {
+							"cpu": 0.5,
+							"memory": 1000,
+							"net_bandwidth": 100,
+							"storage": {
+								"type": "remote",
+								"performance": "high",
+								"volumes": [{
+									"type": "data",
+									"capacity": 100
+								}]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}]

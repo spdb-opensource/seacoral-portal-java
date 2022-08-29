@@ -1,0 +1,14 @@
+[
+	{
+		"portValue": "1001",
+		"used": "成功",
+		"servName": "redis",
+		"id":"001"
+	},
+		{
+		"portValue": "1002",
+		"used": "成功",
+		"servName": "mysql",
+		"id":"002"
+	}
+]

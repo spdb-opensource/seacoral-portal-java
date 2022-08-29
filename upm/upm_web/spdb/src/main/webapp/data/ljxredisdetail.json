@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Of1122233d",
+    "cluster": "redis",
+    "mainframe": "192.168.1.147",
+    "IP": "10.11.11.11",
+    "port": "2333",
+    "cpunum":"3",
+    "memory":"2",
+    "datanum":"10",
+    "lognum":"5",
+    "state":"passing",
+    "stateofcon":"小于一秒"
+  },
+  {
+    "name": "Of1122234d",
+    "cluster": "redis",
+    "mainframe": "192.168.1.142",
+    "IP": "10.11.11.21",
+    "port": "2343",
+    "cpunum":"3",
+    "memory":"2",
+    "datanum":"10",
+    "lognum":"5",
+    "state":"passing",
+    "stateofcon":"Up less than a second"
+  },
+  {
+    "name": "Of1122233e",
+    "cluster": "redis",
+    "mainframe": "192.168.1.148",
+    "IP": "10.11.11.12",
+    "port": "2334",
+    "cpunum":"3",
+    "memory":"2",
+    "datanum":"10",
+    "lognum":"5",
+    "state":"passing",
+    "stateofcon":"Up less than a second"
+  },
+  {
+    "name": "Of1139873d",
+    "cluster": "redis",
+    "mainframe": "192.168.2.144",
+    "IP": "10.11.11.15",
+    "port": "2334",
+    "cpunum":"3",
+    "memory":"2",
+    "datanum":"10",
+    "lognum":"5",
+    "state":"passing",
+    "stateofcon":"Up less than a second"
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "name": "data-from-json",
+    "id": "11111",
+    "region": "shanghai",
+    "IPtype": "type1",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "0",
+    "state": "1"
+  },
+  {
+    "name": "data-from-json2",
+    "id": "11112",
+    "region": "wuhan",
+    "IPtype": "type2",
+    "IPstart": "1.2.3.4",
+    "IPend": "5.6.7.8",
+    "mocode": "25",
+    "segment":"9.0.1.2",
+    "vlanID": "0",
+    "state": "1"
+
+  },
+  {
+    "name": "data-from-json3",
+    "id": "11113",
+    "region": "beijing",
+    "IPtype": "type3",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "2",
+    "state": "1"
+  },
+  {
+    "name": "data-from-json4",
+    "id": "11114",
+    "region": "shanghai",
+    "IPtype": "type4",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "0",
+    "state": "1"
+  },
+  {
+    "name": "data-from-json5",
+    "id": "11115",
+    "region": "shanghai",
+    "IPtype": "type1",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "2",
+    "state": "1"
+  },
+  {
+    "name": "data-from-json6",
+    "id": "11116",
+    "region": "beijing",
+    "IPtype": "type3",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "2",
+    "state": "1"
+  },
+  {
+    "name": "data-from-json7",
+    "id": "11117",
+    "region": "wuhan",
+    "IPtype": "type1",
+    "IPstart": "192.168.101.1",
+    "IPend": "192.168.101.101",
+    "mocode": "25",
+    "segment":"192.168.101.1",
+    "vlanID": "0",
+    "state": "1"
+  }
+]
+

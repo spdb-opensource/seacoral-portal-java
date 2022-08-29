@@ -1,0 +1,10 @@
+#mysql database setting
+jdbc.type=mysql
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/spdb_server
+jdbc.username=test
+jdbc.password=1234qwer
+jdbc.maxActive=100
+jdbc.maxWait=10000
+jdbc.timeBetweenEvictionRunsMillis=60000
+jdbc.minEvictableIdleTimeMillis=1800000

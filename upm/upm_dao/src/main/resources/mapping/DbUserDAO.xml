@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.DbUserDAO">
+    <resultMap id="userRM" type="com.bsg.upm.domain.DbUserDO">
+        <id property="order_id" column="order_id" />
+        <result property="username" column="username" />
+        <result property="userpwd" column="userpwd" />
+        <result property="dbname" column="dbname" />
+        <result property="createTime" column="createTime" />
+    </resultMap>
+
+    <resultMap id="userDetailRM" extends="userRM"
+        type="com.bsg.upm.domain.DbUserDO">
+    </resultMap>
+    
+    <sql id="dbuser">
+        order_id,
+        username,
+        userpwd,
+        dbname,
+        type,
+        createTime
+    </sql>
+
+    <select id="list" resultMap="userDetailRM">
+        SELECT 
+            <include refid="dbuser" />
+        FROM tbl_db_user u 
+        WHERE u.order_id = #{order_id}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.DbUserDO"
+        useGeneratedKeys="true" keyProperty="order_id">
+        INSERT INTO tbl_db_user
+        (
+        	order_id,
+            username,
+            userpwd,
+            dbname,
+            type,
+            createTime
+        )
+        VALUES
+        (
+        	#{order_id},
+            #{username},
+            #{userpwd},
+            #{dbname},
+            #{type},
+            #{createTime}
+        )
+    </insert>
+    <insert id="saveSchema" parameterType="com.bsg.upm.domain.SchemaDO"
+        useGeneratedKeys="true" keyProperty="order_id">
+        INSERT INTO tbl_db_user
+        (
+        	order_id,
+            username,
+            userpwd,
+            dbname,
+            type,
+            create
+        )
+        VALUES
+        (
+        	#{order_id},
+            #{username},
+            #{userpwd},
+            #{dbname},
+            #{type},
+            #{createTime}
+        )
+    </insert>
+    
+   <select id="getDbUsers" resultMap="userDetailRM">
+       SELECT 
+            <include refid="dbuser" />
+        FROM tbl_db_user t 
+        WHERE  t.order_id = #{order_id}
+        	AND type = #{type}
+    </select>
+    
+    <delete id="remove">
+		DELETE FROM tbl_db_user
+		WHERE order_id = #{order_id}
+	</delete>
+    
+
+</mapper>

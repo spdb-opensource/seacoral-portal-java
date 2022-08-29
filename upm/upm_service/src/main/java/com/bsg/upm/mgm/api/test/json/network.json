@@ -1,0 +1,75 @@
+[
+	{
+		"id": "1",
+		"name": "network001",
+		"site": {
+			"id": "1",
+			"name": "xxx01"
+		},
+		"cluster": {
+			"id": "xxx01",
+			"name": "xx01"
+		},
+		"topology": [
+			"topology1",
+			"topology3"
+		],
+		"ip_summary": {
+			"start_ip": "10.0.0.100",
+			"end_ip": "10.0.0.199",
+			"gateway": "10.0.0.254",
+			"prefix": 24,
+			"vlan": 100,
+			"total": 100,
+			"used": 80
+		},
+		"enabled": false,
+		"desc": "xxxxxx01",
+		"created": {
+			"user": "xx01",
+			"timestamp": "2019-07-08 13:36:12"
+		},
+		"modified": {
+			"user": "xx02",
+			"timestamp": "2019-07-08 13:31:12"
+		}
+	},
+	{
+		"id": "2",
+		"name": "network002",
+		"site": {
+			"id": "2",
+			"name": "xxx02"
+		},
+		"cluster": {
+			"id": "xxx02",
+			"name": "xx02"
+		},
+		"topology": [
+			"string"
+		],
+		"ip_summary": {
+			"start_ip": "10.0.0.102",
+			"end_ip": "10.0.0.199",
+			"gateway": "10.0.0.254",
+			"prefix": 24,
+			"vlan": 100,
+			"total": 100,
+			"used": 80
+		},
+		"enabled": true,
+		"desc": "xxxxxx02",
+		"created": {
+			"user": "xx02",
+			"timestamp": "2019-07-08 13:36:10"
+		},
+		"modified": {
+			"user": "xx03",
+			"timestamp": "2019-07-08 13:31:14"
+		}
+	},
+	{
+		"id": "3"
+	}
+]
+

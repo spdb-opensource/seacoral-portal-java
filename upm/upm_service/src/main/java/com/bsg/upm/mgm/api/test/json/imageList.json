@@ -1,0 +1,48 @@
+[
+    {
+        "id": "xxxx",
+        "type": "upredis",
+        "major": 2,
+        "minor": 0,
+        "patch": 0,
+        "build": 51,
+        "enabled": true,
+        "task": {
+            "id": "xxxxxx",
+            "action": "in",
+            "status": "success"
+        },
+        "desc": "xxxxx",
+        "created": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        },
+        "modified": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        }
+    },
+    {
+        "id": "xxxx",
+        "type": "upredis",
+        "major": 2,
+        "minor": 0,
+        "patch": 0,
+        "build": 51,
+        "enabled": true,
+        "task": {
+            "id": "xxxxxx",
+            "action": "in",
+            "status": "success"
+        },
+        "desc": "xxxxx",
+        "created": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        },
+        "modified": {
+            "user": "xxx",
+            "timestamp": "yyyy-mm-dd hh:mm:ss"
+        }
+    }
+]

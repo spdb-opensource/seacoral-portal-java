@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.CmhaProxyDAO">
+    <resultMap id="cmhaProxyRM" type="com.bsg.upm.domain.CmhaProxyDO">
+        <id property="order_id" column="order_id" />
+        <result property="mode" column="mode" />
+        <result property="replicas" column="replicas" />
+        <result property="port" column="port" />
+        <result property="cpu" column="cpu" />
+        <result property="memory" column="memory" />
+        <result property="performance" column="performance" />
+        <result property="data_capacity" column="data_capacity" />
+        <result property="log_capacity" column="log_capacity" />
+        <result property="type" column="type" />
+        <result property="img_id" column="img_id" />
+        <result property="createTime" column="createTime" />
+    </resultMap>
+
+    <resultMap id="cmhaProxyDetail" extends="cmhaProxyRM"
+        type="com.bsg.upm.domain.CmhaProxyDO">
+    </resultMap>
+    <sql id="cmhaProxy">
+        order_id,
+        mode,
+        replicas,
+        port,
+        cpu,
+        memory,
+        performance,
+        data_capacity,
+        log_capacity,
+        type,
+        img_id,
+        createTime
+    </sql>
+
+    <select id="list" resultMap="cmhaProxyDetail">
+        SELECT 
+            <include refid="cmhaProxy" />
+        FROM tbl_cmha_proxy u 
+        WHERE u.order_id = #{order_id}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.CmhaProxyDO"
+        useGeneratedKeys="true" keyProperty="order_id">
+        INSERT INTO tbl_cmha_proxy
+        (
+        	order_id,
+            mode,
+            replicas,
+            port,
+            cpu,
+            memory,
+            performance,
+            data_capacity,
+            log_capacity,
+            type,
+            img_id,
+            createTime
+        )
+    
+        VALUES
+        (
+        	#{order_id},
+            #{mode},
+            #{replicas},
+            #{port},
+            #{cpu},
+            #{memory},
+            #{performance},
+            #{data_capacity},
+            #{log_capacity},
+            #{type},
+            #{img_id},
+            #{createTime}
+        )
+    </insert>
+    
+   <select id="getCmhaOrProxy" resultMap="cmhaProxyDetail">
+       SELECT 
+            <include refid="cmhaProxy" />
+        FROM tbl_cmha_proxy t 
+        WHERE  t.order_id = #{order_id}
+        	AND type = #{type}
+    </select>
+    
+    <delete id="remove">
+		DELETE FROM tbl_cmha_proxy
+		WHERE order_id = #{order_id}
+	</delete>
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsg.upm.dao.RoleCfgOthersDAO">
+    <resultMap id="othersRM" type="com.bsg.upm.domain.RoleCfgOthersDO">
+        <id property="id" column="others_id" />
+        <result property="roleId" column="others_role_id" />
+        <result property="orderAutoAudit" column="others_order_auto_audit" />
+        <result property="orderAutoExecute" column="others_order_auto_execute" />
+    </resultMap>
+    
+    <sql id="others">
+        co.id AS others_id,
+        co.role_id AS others_role_id,
+        co.order_auto_audit AS others_order_auto_audit,
+        co.order_auto_execute AS others_order_auto_execute
+    </sql>
+
+    <select id="list" resultMap="othersRM">
+        SELECT 
+            <include refid="others" />
+        FROM tbl_role_cfg_others co
+    </select>
+
+    <select id="getByRoleId" resultMap="othersRM">
+        SELECT 
+            <include refid="others" />
+        FROM tbl_role_cfg_others co
+        WHERE co.role_id = #{roleId}
+    </select>
+
+    <insert id="save" parameterType="com.bsg.upm.domain.RoleCfgOthersDO"
+        useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_role_cfg_others
+        (
+        id,
+            role_id,
+            order_auto_audit,
+            order_auto_execute
+        )
+        VALUES
+        (
+        #{id},
+            #{roleId},
+            #{orderAutoAudit},
+            #{orderAutoExecute}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.bsg.upm.domain.RoleCfgOthersDO">
+        UPDATE tbl_role_cfg_others
+        <set>
+            order_auto_audit = #{orderAutoAudit},
+            order_auto_execute = #{orderAutoExecute}
+        </set>
+        WHERE role_id = #{roleId}
+    </update>
+
+    <delete id="removeByRoleId">
+        DELETE FROM tbl_role_cfg_others
+        WHERE role_id = #{roleId}
+    </delete>
+
+</mapper>
